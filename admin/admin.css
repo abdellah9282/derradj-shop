@@ -199,17 +199,11 @@ body{
   .topbar{flex-direction:column; align-items:stretch}
   .actions{display:flex; gap:10px; flex-wrap:wrap}
 }
-/* =========================
-   ✅ Orders table → vertical cards on mobile
-   ========================= */
 @media (max-width: 768px){
 
   /* hide table header */
-  #ordersTable thead{
-    display:none;
-  }
+  #ordersTable thead{ display:none; }
 
-  /* table becomes block */
   #ordersTable,
   #ordersTable tbody,
   #ordersTable tr,
@@ -218,7 +212,6 @@ body{
     width:100%;
   }
 
-  /* each order = card */
   #ordersTable tr{
     background:#fff;
     border:1px solid var(--border);
@@ -228,36 +221,85 @@ body{
     box-shadow:var(--shadow);
   }
 
-  /* cells layout */
+  /* ✅ FIX: grid layout (no big empty space) */
   #ordersTable td{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
+    display:grid;
+    grid-template-columns: 120px 1fr; /* عرض التسمية + باقي المساحة للقيمة */
     gap:10px;
     padding:8px 0;
     border:none;
-    text-align:right;
     white-space:normal;
-    font-size:14px;
+    text-align:right;
+    align-items:start;
   }
 
-  /* label before value */
   #ordersTable td::before{
     content: attr(data-label);
     font-weight:700;
     color:var(--muted);
-    min-width:110px;
-    text-align:right;
+    min-width:0;       /* ✅ مهم */
   }
 
-  /* actions nicer */
+  /* ✅ value stays close and wraps nicely */
+  #ordersTable td{
+    overflow-wrap:anywhere;
+    word-break:break-word;
+  }
+
+  /* Actions row */
   #ordersTable td:last-child{
-    justify-content:center;
-    margin-top:10px;
+    grid-template-columns: 1fr; /* زرّ الإجراءات يكون سطر لوحده */
+  }
+}
+@media (max-width: 768px){
+
+  /* ✅ الحالة: اجعل المحتوى عمودي ومنظّم */
+  #ordersTable td[data-label="الحالة"]{
+    grid-template-columns: 120px 1fr;
+    align-items:center;
   }
 
-  .row-actions{
-    justify-content:center;
+  /* الحقل الثاني (القيمة) داخل الحالة: خليها Column */
+  #ordersTable td[data-label="الحالة"] > *{
+    justify-self:start;
+  }
+
+  #ordersTable td[data-label="الحالة"] .badge{
+    margin-bottom:8px;
+    display:inline-block;
+  }
+
+  #ordersTable td[data-label="الحالة"] .statusSelect{
+    width:100%;
+    min-width:0;
+  }
+
+  /* ✅ الإجراءات: خلّي "إجراءات" + الأزرار في سطر مرتب */
+  #ordersTable td[data-label="إجراءات"]{
+    grid-template-columns: 120px 1fr;
+    align-items:center;
+  }
+
+  #ordersTable td[data-label="إجراءات"] .row-actions{
+    justify-content:flex-start;
     gap:10px;
+    flex-wrap:wrap;
+  }
+}
+html, body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+@media (max-width: 768px){
+
+  /* ❌ لا نحتاج scroll أفقي في وضع البطاقات */
+  .table-wrap{
+    overflow-x:hidden;
+  }
+
+  /* ❌ ألغِ min-width نهائيًا */
+  #ordersTable{
+    min-width:0 !important;
+    width:100%;
   }
 }
