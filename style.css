@@ -3486,3 +3486,13 @@ grid-template-columns: 1fr; /* دورة واحدة في كل صف */
   .ds-about-points{ max-width: 100%; }
   .ds-about-points li{ font-size: 15px; }
 }
+/* ✅ Fix: منع كرت التعليق من التمدد بعرض الصفحة */
+#client-feedback .comments-grid{
+  justify-items: center;     /* يوسّط الكروت داخل الشبكة */
+  align-items: start;
+}
+
+#client-feedback .comment-card-modern{
+  width: 100%;
+  max-width: 650px;          /* ✅ عدّلها: 520 / 600 / 700 حسب ما تحب */
+}

@@ -641,7 +641,7 @@ try {
         total_price: totalPrice,
 
         // ✅ كل الكتب هنا (بدل order_items)
-        items: items,
+items: items.map(it => it.name).join("، "),
 
         // (اختياري) مجموع الكتب بدون توصيل
         books_total: booksTotal,
@@ -650,7 +650,7 @@ try {
 
   if (orderErr) throw orderErr;
 
-  alert("✅ تم إرسال الطلب بنجاح!");
+window.location.href = "success.html";
   orderForm.reset();
   refreshDeliveryLabels();
   toggleCommuneVisibility();
