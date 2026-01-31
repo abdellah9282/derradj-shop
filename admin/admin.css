@@ -303,3 +303,56 @@ html, body{
     width:100%;
   }
 }
+/* ===== Mobile: show tables as vertical cards ===== */
+@media (max-width: 640px) {
+
+  /* امنع التحريك لليسار/اليمين */
+  html, body { overflow-x: hidden; }
+
+  /* الغي العرض الكبير الذي يسبب سكرول أفقي */
+  .table-wrap { overflow: visible; }
+  .table { min-width: 0 !important; width: 100%; }
+
+  /* اخفاء العناوين */
+  .table thead { display: none; }
+
+  /* كل صف = بطاقة */
+  .table tr {
+    display: block;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    margin: 10px 10px;
+    overflow: hidden;
+    background: #fff;
+  }
+
+  /* كل خلية = سطر (label + value) */
+  .table td {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 12px;
+    text-align: right;
+    white-space: normal;     /* يسمح بالنزول سطر */
+    border-bottom: 1px solid var(--border);
+  }
+
+  .table td:last-child { border-bottom: none; }
+
+  /* label يجي من data-label */
+  .table td::before {
+    content: attr(data-label);
+    font-weight: 800;
+    color: var(--muted);
+    flex: 0 0 40%;
+    text-align: right;
+  }
+
+  /* القيمة */
+  .table td > * {
+    flex: 1;
+  }
+
+  /* إجراءات: خليه منظم */
+  .row-actions { justify-content: flex-start; }
+}

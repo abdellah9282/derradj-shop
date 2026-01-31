@@ -24,86 +24,100 @@
   </header>
 
   <main class="container">
+<!-- ======= Orders: NULL (Pending) ======= -->
+<section class="card" id="orders-pending">
+  <div class="card-head">
+    <h2>⏳ الطلبات (غير مراجعة)</h2>
 
-    <!-- ======= Orders ======= -->
-    <section class="card">
-      <div class="card-head">
-        <h2>📦 الطلبات</h2>
+    <div class="filters">
+      <input id="ordersSearch" class="input" placeholder="ابحث بالاسم/الهاتف/الولاية..." />
 
-        <div class="filters">
-          <input id="ordersSearch" class="input" placeholder="ابحث بالاسم/الهاتف/الولاية..." />
+      <select id="limitSelect" class="input">
+        <option value="25">آخر 25</option>
+        <option value="50" selected>آخر 50</option>
+        <option value="100">آخر 100</option>
+        <option value="200">آخر 200</option>
+      </select>
+    </div>
+  </div>
 
-          <select id="statusFilter" class="input">
-            <option value="">كل الحالات</option>
-            <option value="new">جديد</option>
-            <option value="confirmed">مؤكد</option>
-            <option value="shipped">في الطريق</option>
-            <option value="delivered">تم التسليم</option>
-            <option value="cancelled">ملغى</option>
-          </select>
+  <div class="table-wrap">
+    <table class="table" id="ordersTablePending">
+      <thead>
+        <tr>
+          <th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>الولاية</th><th>البلدية</th>
+          <th>التوصيل</th><th>التوصيل (دج)</th><th>المجموع (دج)</th><th>الحالة</th><th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="ordersTbodyPending">
+        <tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-          <select id="limitSelect" class="input">
-            <option value="25">آخر 25</option>
-            <option value="50" selected>آخر 50</option>
-            <option value="100">آخر 100</option>
-            <option value="200">آخر 200</option>
-          </select>
-        </div>
-      </div>
+<!-- ======= Messages ======= -->
+<section class="card" id="messages-section">
+  <div class="card-head">
+    <h2>💬 الرسائل</h2>
 
-      <div class="table-wrap">
-        <table class="table" id="ordersTable">
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>الاسم</th>
-              <th>الهاتف</th>
-              <th>الولاية</th>
-              <th>البلدية</th>
-              <th>التوصيل</th>
-              <th>التوصيل (دج)</th>
-              <th>المجموع (دج)</th>
-              <th>الحالة</th>
-              <th>إجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="ordersTbody">
-            <tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>
-          </tbody>
-        </table>
-      </div>
+    <div class="filters">
+      <input
+        id="messagesSearch"
+        class="input"
+        placeholder="ابحث بالاسم/الهاتف/نص الرسالة..."
+      />
+    </div>
+  </div>
 
-      <div class="foot-note muted">
-        ملاحظة: زر 👁️ يعرض تفاصيل الطلب (العنوان + الكتب).
-      </div>
-    </section>
+  <div class="table-wrap">
+    <table class="table" id="messagesTable">
+      <thead>
+        <tr>
+          <th>التاريخ</th>
+          <th>الاسم</th>
+          <th>الهاتف</th>
+          <th>الرسالة</th>
+          <th>إجراءات</th>
+        </tr>
+      </thead>
 
-    <!-- ======= Messages ======= -->
-    <section class="card">
-      <div class="card-head">
-        <h2>💬 الرسائل</h2>
-        <div class="filters">
-          <input id="messagesSearch" class="input" placeholder="ابحث بالاسم/الهاتف/نص الرسالة..." />
-        </div>
-      </div>
+      <tbody id="messagesTbody">
+        <tr>
+          <td colspan="5" class="muted center">... جاري التحميل</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
 
-      <div class="table-wrap">
-        <table class="table" id="messagesTable">
-          <thead>
-            <tr>
-              <th>التاريخ</th>
-              <th>الاسم</th>
-              <th>الهاتف</th>
-              <th>الرسالة</th>
-              <th>إجراءات</th>
-            </tr>
-          </thead>
-          <tbody id="messagesTbody">
-            <tr><td colspan="5" class="muted center">... جاري التحميل</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+
+<!-- ======= Orders: TRUE (Confirmed) ======= -->
+<section class="card" id="orders-confirmed">
+  <div class="card-head">
+    <h2>✅ الطلبات (مؤكدة)</h2>
+  </div>
+
+  <div class="table-wrap">
+    <table class="table" id="ordersTableConfirmed">
+      <thead>
+        <tr>
+          <th>التاريخ</th><th>الاسم</th><th>الهاتف</th><th>الولاية</th><th>البلدية</th>
+          <th>التوصيل</th><th>التوصيل (دج)</th><th>المجموع (دج)</th><th>الحالة</th><th>إجراءات</th>
+        </tr>
+      </thead>
+      <tbody id="ordersTbodyConfirmed">
+        <tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot-note muted">
+    ملاحظة: زر 👁️ يعرض تفاصيل الطلب (العنوان + الكتب).
+  </div>
+</section>
+
+
 
   </main>
 
