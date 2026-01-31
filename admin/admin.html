@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>لوحة الإدارة</title>
+  <link rel="stylesheet" href="admin.css" />
+    <link rel="icon" type="image/jpeg" href="/Logo.png">
+
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>لوحة الإدارة</h1>
+      <p class="muted">عرض الطلبات والرسائل + إدارة الحالة</p>
+    </div>
+
+    <div class="actions">
+      <button id="refreshBtn" class="btn">🔄 تحديث</button>
+      <button id="exportOrdersBtn" class="btn">⬇️ تصدير الطلبات CSV</button>
+      <button id="exportMessagesBtn" class="btn">⬇️ تصدير الرسائل CSV</button>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ======= Orders ======= -->
+    <section class="card">
+      <div class="card-head">
+        <h2>📦 الطلبات</h2>
+
+        <div class="filters">
+          <input id="ordersSearch" class="input" placeholder="ابحث بالاسم/الهاتف/الولاية..." />
+
+          <select id="statusFilter" class="input">
+            <option value="">كل الحالات</option>
+            <option value="new">جديد</option>
+            <option value="confirmed">مؤكد</option>
+            <option value="shipped">في الطريق</option>
+            <option value="delivered">تم التسليم</option>
+            <option value="cancelled">ملغى</option>
+          </select>
+
+          <select id="limitSelect" class="input">
+            <option value="25">آخر 25</option>
+            <option value="50" selected>آخر 50</option>
+            <option value="100">آخر 100</option>
+            <option value="200">آخر 200</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" id="ordersTable">
+          <thead>
+            <tr>
+              <th>التاريخ</th>
+              <th>الاسم</th>
+              <th>الهاتف</th>
+              <th>الولاية</th>
+              <th>البلدية</th>
+              <th>التوصيل</th>
+              <th>التوصيل (دج)</th>
+              <th>المجموع (دج)</th>
+              <th>الحالة</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTbody">
+            <tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="foot-note muted">
+        ملاحظة: زر 👁️ يعرض تفاصيل الطلب (العنوان + الكتب).
+      </div>
+    </section>
+
+    <!-- ======= Messages ======= -->
+    <section class="card">
+      <div class="card-head">
+        <h2>💬 الرسائل</h2>
+        <div class="filters">
+          <input id="messagesSearch" class="input" placeholder="ابحث بالاسم/الهاتف/نص الرسالة..." />
+        </div>
+      </div>
+
+      <div class="table-wrap">
+        <table class="table" id="messagesTable">
+          <thead>
+            <tr>
+              <th>التاريخ</th>
+              <th>الاسم</th>
+              <th>الهاتف</th>
+              <th>الرسالة</th>
+              <th>إجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="messagesTbody">
+            <tr><td colspan="5" class="muted center">... جاري التحميل</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======= Modal تفاصيل الطلب ======= -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <div class="modal-head">
+        <h3 id="modalTitle">تفاصيل الطلب</h3>
+        <button id="modalClose" class="btn danger">✖</button>
+      </div>
+      <div id="modalBody" class="modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+</body>
+</html>
