@@ -212,35 +212,27 @@
       .map((o) => {
         const s = badgeClass(o.status);
         return `
-          <tr data-id="${escapeHtml(o.id)}">
-            <td>${escapeHtml(fmtDate(o.created_at))}</td>
-            <td>${escapeHtml(o.full_name || "-")}</td>
-            <td>${escapeHtml(o.phone || "-")}</td>
-            <td>${escapeHtml(o.wilaya || "-")}</td>
-            <td>${escapeHtml(o.commune || "-")}</td>
-            <td>${escapeHtml(o.delivery_type || "-")}</td>
-            <td>${escapeHtml(fmtMoney(o.shipping_fee))}</td>
-            <td>${escapeHtml(fmtMoney(o.total_price))}</td>
-            <td>
-              <span class="badge ${s}">${escapeHtml(statusLabel(o.status))}</span>
-              <div style="margin-top:6px">
-                <select class="statusSelect input" style="min-width:160px; padding:8px;">
-                  <option value="new" ${s === "new" ? "selected" : ""}>جديد</option>
-                  <option value="confirmed" ${s === "confirmed" ? "selected" : ""}>مؤكد</option>
-                  <option value="shipped" ${s === "shipped" ? "selected" : ""}>في الطريق</option>
-                  <option value="delivered" ${s === "delivered" ? "selected" : ""}>تم التسليم</option>
-                  <option value="cancelled" ${s === "cancelled" ? "selected" : ""}>ملغى</option>
-                </select>
-              </div>
-            </td>
-            <td>
-              <div class="row-actions">
-                <button class="icon-btn viewBtn" title="عرض التفاصيل">👁️</button>
-                <button class="icon-btn saveStatusBtn" title="حفظ الحالة">💾</button>
-                <button class="icon-btn delOrderBtn" title="حذف الطلب">🗑️</button>
-              </div>
-            </td>
-          </tr>
+       <tr data-id="${escapeHtml(o.id)}">
+  <td data-label="التاريخ">${escapeHtml(fmtDate(o.created_at))}</td>
+  <td data-label="الاسم">${escapeHtml(o.full_name || "-")}</td>
+  <td data-label="الهاتف">${escapeHtml(o.phone || "-")}</td>
+  <td data-label="الولاية">${escapeHtml(o.wilaya || "-")}</td>
+  <td data-label="البلدية">${escapeHtml(o.commune || "-")}</td>
+  <td data-label="نوع التوصيل">${escapeHtml(o.delivery_type || "-")}</td>
+  <td data-label="التوصيل">${escapeHtml(fmtMoney(o.shipping_fee))}</td>
+  <td data-label="المجموع">${escapeHtml(fmtMoney(o.total_price))}</td>
+  <td data-label="الحالة">
+    <span class="badge ${s}">${escapeHtml(statusLabel(o.status))}</span>
+  </td>
+  <td data-label="إجراءات">
+    <div class="row-actions">
+      <button class="icon-btn viewBtn">👁️</button>
+      <button class="icon-btn saveStatusBtn">💾</button>
+      <button class="icon-btn delOrderBtn">🗑️</button>
+    </div>
+  </td>
+</tr>
+
         `;
       })
       .join("");
