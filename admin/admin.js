@@ -34,14 +34,32 @@ console.log("✅ Supabase reachable:", r.status);
     }
   })();
 
+
+  // =========================
+// ✅ AUTH GUARD (Protect admin page)
+// =========================
+async function requireAdminLogin() {
+  const { data, error } = await supabase.auth.getSession();
+  const session = data?.session;
+
+  // إذا لا توجد جلسة -> رجّع لصفحة الدخول
+  if (!session) {
+    const returnTo = encodeURIComponent(location.pathname + location.search);
+    location.href = `login.html?returnTo=${returnTo}`;
+    return false;
+  }
+
+  return true;
+}
   // =========================
   // DOM
   // =========================
-    const refreshBtn = document.getElementById("refreshBtn");
+  const refreshBtn = document.getElementById("refreshBtn");
   const exportOrdersBtn = document.getElementById("exportOrdersBtn");
   const exportMessagesBtn = document.getElementById("exportMessagesBtn");
+  const logoutBtn = document.getElementById("logoutBtn");
 
-  // ✅ 3 أقسام للطلبات (تأكد IDs موجودة في HTML)
+  // ✅ 3 أقسام للطلبات
   const ordersTbodyPending = document.getElementById("ordersTbodyPending");     // status = null
   const ordersTbodyCancelled = document.getElementById("ordersTbodyCancelled"); // status = false
   const ordersTbodyConfirmed = document.getElementById("ordersTbodyConfirmed"); // status = true
@@ -57,6 +75,18 @@ console.log("✅ Supabase reachable:", r.status);
   const modalClose = document.getElementById("modalClose");
   const modalTitle = document.getElementById("modalTitle");
   const modalBody = document.getElementById("modalBody");
+
+  // =========================
+  // Logout
+  // =========================
+  logoutBtn?.addEventListener("click", async () => {
+    try {
+      await supabase.auth.signOut();
+    } catch (e) {
+      console.error(e);
+    }
+    location.href = "login.html";
+  });
 
   // =========================
   // State
@@ -90,7 +120,7 @@ console.log("✅ Supabase reachable:", r.status);
     return x.toLocaleString("fr-DZ").replace(/\s+/g, "") + " دج";
   }
 
-  // status: null / true / false (وقد يأتي نص قديم)
+  // status: null / true / false (وقد يأتي نص)
   function normBoolStatus(v) {
     if (v === true || v === "true") return true;
     if (v === false || v === "false") return false;
@@ -156,6 +186,7 @@ console.log("✅ Supabase reachable:", r.status);
   // =========================
   async function fetchOrders() {
     const limit = Number(limitSelect?.value || 50);
+
     const { data, error } = await supabase
       .from("orders")
       .select("*")
@@ -166,23 +197,19 @@ console.log("✅ Supabase reachable:", r.status);
     ORDERS_CACHE = Array.isArray(data) ? data : [];
   }
 
-async function fetchMessages() {
-  const { data, error } = await supabase
-    .from("message")
-    .select("id,name,contact,message,created_at")
-    .order("created_at", { ascending: false })
-    .limit(200);
+  async function fetchMessages() {
+    const { data, error } = await supabase
+      .from("message")
+      .select("id,name,contact,message,created_at")
+      .order("created_at", { ascending: false })
+      .limit(200);
 
-  console.log("MESSAGES:", data);
-  console.log("MESSAGES ERROR:", error);
-
-  if (error) throw error;
-  MESSAGES_CACHE = Array.isArray(data) ? data : [];
-}
-
+    if (error) throw error;
+    MESSAGES_CACHE = Array.isArray(data) ? data : [];
+  }
 
   // =========================
-  // Render Orders (3 أقسام)
+  // Render Orders
   // =========================
   function filterOrders(list) {
     const q = String(ordersSearch?.value || "").trim().toLowerCase();
@@ -228,11 +255,9 @@ async function fetchMessages() {
           <td data-label="نوع التوصيل">${escapeHtml(o.delivery_type || "-")}</td>
           <td data-label="التوصيل">${escapeHtml(fmtMoney(o.shipping_fee))}</td>
           <td data-label="المجموع">${escapeHtml(fmtMoney(o.total_price))}</td>
-
           <td data-label="الحالة">
             <span class="badge ${s}">${escapeHtml(statusLabel(o.status))}</span>
           </td>
-
           <td data-label="إجراءات">
             <div class="row-actions">
               <button class="icon-btn viewBtn" title="عرض التفاصيل">👁️</button>
@@ -242,21 +267,18 @@ async function fetchMessages() {
       `;
     }
 
-    // Pending
     if (ordersTbodyPending) {
       ordersTbodyPending.innerHTML = pending.length
         ? pending.map(rowHTML).join("")
         : `<tr><td colspan="10" class="muted center">لا توجد طلبات غير مراجعة</td></tr>`;
     }
 
-    // Cancelled
     if (ordersTbodyCancelled) {
       ordersTbodyCancelled.innerHTML = cancelled.length
         ? cancelled.map(rowHTML).join("")
         : `<tr><td colspan="10" class="muted center">لا توجد طلبات ملغاة</td></tr>`;
     }
 
-    // Confirmed
     if (ordersTbodyConfirmed) {
       ordersTbodyConfirmed.innerHTML = confirmed.length
         ? confirmed.map(rowHTML).join("")
@@ -278,7 +300,6 @@ async function fetchMessages() {
 
   function renderMessages() {
     const list = filterMessages(MESSAGES_CACHE);
-
     if (!messagesTbody) return;
 
     if (!list.length) {
@@ -325,7 +346,6 @@ async function fetchMessages() {
   limitSelect?.addEventListener("change", () => boot(true));
   messagesSearch?.addEventListener("input", renderMessages);
 
-  // ✅ Event delegation للطلبات (ثلاثة جداول)
   async function onOrdersClick(e) {
     const tr = e.target.closest("tr");
     if (!tr) return;
@@ -343,7 +363,6 @@ async function fetchMessages() {
   ordersTbodyCancelled?.addEventListener("click", onOrdersClick);
   ordersTbodyConfirmed?.addEventListener("click", onOrdersClick);
 
-  // ✅ رسائل
   messagesTbody?.addEventListener("click", async (e) => {
     const tr = e.target.closest("tr");
     if (!tr) return;
@@ -435,9 +454,16 @@ async function fetchMessages() {
       if (ordersTbodyConfirmed) ordersTbodyConfirmed.innerHTML = `<tr><td colspan="10" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
       if (messagesTbody) messagesTbody.innerHTML = `<tr><td colspan="5" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
 
-      alert("❌ مشكلة في جلب البيانات من Supabase.\n\n" + msg + "\n\n✅ تأكد من: RLS OFF أو Policies صحيحة.");
+      alert("❌ مشكلة في جلب البيانات من Supabase.\n\n" + msg + "\n\n✅ تأكد من السياسات (RLS) أو أن المستخدم مسجل دخول.");
     }
   }
 
-  boot(false);
+  // =========================
+  // ✅ Start only after guard
+  // =========================
+  (async () => {
+    const ok = await requireAdminLogin();
+    if (!ok) return;
+    boot(false);
+  })();
 })();
