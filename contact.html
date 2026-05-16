@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تواصل معنا — Derradj Shop</title>
+  <meta name="description" content="تواصل مع فريق Derradj Shop — نحن هنا لمساعدتك في أي وقت.">
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <span>Derradj <span class="logo-accent">Shop</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="index.html#products" class="nav-link">المنتجات</a>
+      <a href="about.html"          class="nav-link">من نحن</a>
+      <a href="delivery.html"       class="nav-link">التوصيل</a>
+      <a href="faq.html"            class="nav-link">الأسئلة الشائعة</a>
+      <a href="contact.html"        class="nav-link">تواصل معنا</a>
+    </nav>
+    <a href="ordre/index.html" class="btn-header-cta">🛒 اطلب الآن</a>
+  </div>
+</header>
+
+<section class="inner-hero">
+  <div class="container">
+    <h1>📞 تواصل معنا</h1>
+    <p>فريقنا متاح دائماً لمساعدتك في أي استفسار أو مشكلة</p>
+  </div>
+</section>
+
+<section class="contact-section" style="padding-top:60px;">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>كيف تتواصل معنا؟</h2>
+        <p>
+          سواء كان لديك سؤال حول منتج، أو تريد متابعة طلبك، أو تحتاج مساعدة — فريقنا هنا لمساعدتك.
+        </p>
+
+        <div class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <div>
+            <strong>الهاتف</strong><br>
+            <a href="tel:+213555491316">0555 49 13 16</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-icon">📧</span>
+          <div>
+            <strong>البريد الإلكتروني</strong><br>
+            <a href="mailto:derradjshop@gmail.com">derradjshop@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <div>
+            <strong>الموقع</strong><br>
+            <span>الجزائر العاصمة، الجزائر</span>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <span class="contact-item-icon">🕐</span>
+          <div>
+            <strong>أوقات الدعم</strong><br>
+            <span>كل أيام الأسبوع من 8 صباحاً إلى 10 مساءً</span>
+          </div>
+        </div>
+
+        <div style="margin-top:24px;padding:20px;background:var(--primary-bg);border-radius:var(--radius);border:1px solid rgba(37,99,235,0.15);">
+          <strong style="color:var(--primary);display:block;margin-bottom:8px;">⚡ رد سريع</strong>
+          <p style="font-size:14px;color:var(--text-light);margin:0;">نرد على استفساراتك في غضون ساعات قليلة في أوقات الدوام.</p>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h3>أرسل لنا رسالة</h3>
+        <form id="contactPageForm">
+          <div class="form-group">
+            <label for="c_name">الاسم الكامل *</label>
+            <input type="text" id="c_name" name="name" placeholder="أدخل اسمك الكامل" required>
+          </div>
+          <div class="form-group">
+            <label for="c_phone">رقم الهاتف *</label>
+            <input type="tel" id="c_phone" name="contact" placeholder="0555xxxxxx" required
+                   dir="ltr" inputmode="numeric" maxlength="10"
+                   oninput="this.value=this.value.replace(/\D/g,'')">
+          </div>
+          <div class="form-group">
+            <label for="c_message">رسالتك *</label>
+            <textarea id="c_message" name="message" rows="5"
+                      placeholder="اكتب رسالتك أو سؤالك هنا بالتفصيل..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">إرسال الرسالة</button>
+          <p id="contactPageStatus" class="status-msg"></p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="main-footer" style="margin-top:80px;">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="footer-logo">
+        <span class="logo-icon">D</span>
+        <span>erradj <span class="logo-accent">Shop</span></span>
+      </a>
+      <p>متجر الإلكترونيات الجزائري رقم 1.</p>
+    </div>
+    <div class="footer-links-col">
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><a href="index.html">الرئيسية</a></li>
+        <li><a href="about.html">من نحن</a></li>
+        <li><a href="delivery.html">سياسة التوصيل</a></li>
+        <li><a href="payment.html">سياسة الدفع</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+        <li><a href="terms.html">الشروط والأحكام</a></li>
+      </ul>
+    </div>
+    <div class="footer-links-col">
+      <h4>تواصل</h4>
+      <div class="footer-contact-list">
+        <a href="tel:+213555491316">📞 0555 49 13 16</a>
+        <a href="mailto:derradjshop@gmail.com">📧 derradjshop@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-links-col">
+      <h4>الدفع</h4>
+      <div class="footer-pay-badge">💳 البطاقة الذهبية</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Derradj Shop — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script type="module">
+  import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  const supabase = createClient(
+    "https://jbmcbjzcedqpvnhbmrhk.supabase.co",
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpibWNianpjZWRxcHZuaGJtcmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NjU1MDUsImV4cCI6MjA4NTI0MTUwNX0.u_D1K7gFCQmmI_m0do5-VpdXrXXLPQ8BCDMLc3Ew1Yk"
+  );
+
+  const form   = document.getElementById("contactPageForm");
+  const status = document.getElementById("contactPageStatus");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    status.style.color = "gray";
+    status.textContent = "⏳ جاري الإرسال...";
+
+    const name    = document.getElementById("c_name").value.trim();
+    const contact = document.getElementById("c_phone").value.trim();
+    const message = document.getElementById("c_message").value.trim();
+
+    if (!name || !contact || !message) {
+      status.style.color = "red";
+      status.textContent = "❌ يرجى ملء جميع الحقول.";
+      return;
+    }
+
+    const { error } = await supabase.from("message").insert([{ name, contact, message }]);
+
+    if (error) {
+      status.style.color = "red";
+      status.textContent = "❌ فشل الإرسال. حاول لاحقاً.";
+      return;
+    }
+
+    status.style.color = "green";
+    status.textContent = "✅ تم إرسال رسالتك بنجاح! سنرد عليك قريباً.";
+    form.reset();
+  });
+</script>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+</script>
+</body>
+</html>

@@ -1,469 +1,452 @@
+/* ==========================================================
+   admin.js — Derradj Shop | Admin Dashboard
+   is_confirmed: NULL = قيد المعالجة | true = تم التأكيد
+   ========================================================== */
+
 (function () {
   "use strict";
 
-  // =========================
-  // ✅ SUPABASE Guard + Client
-  // =========================
-  if (!window.supabase || !window.supabase.createClient) {
-    alert("❌ مكتبة Supabase غير محمّلة. تأكد أنك أضفت supabase-js قبل admin.js");
-    return;
-  }
+  /* ── Supabase ──────────────────────────────────────────── */
+  if (!window.supabase?.createClient) { alert("❌ Supabase غير محمّل."); return; }
 
-  // ✅ FIX: correct project URL (jbmcjbz... not jbmcbjz...)
-  const SUPABASE_URL = "https://jbmcbjzcedqpvnhbmrhk.supabase.co";
-
-  const SUPABASE_ANON_KEY =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpibWNianpjZWRxcHZuaGJtcmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NjU1MDUsImV4cCI6MjA4NTI0MTUwNX0.u_D1K7gFCQmmI_m0do5-VpdXrXXLPQ8BCDMLc3Ew1Yk";
-
+  const SUPABASE_URL      = "https://jbmcbjzcedqpvnhbmrhk.supabase.co";
+  const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpibWNianpjZWRxcHZuaGJtcmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NjU1MDUsImV4cCI6MjA4NTI0MTUwNX0.u_D1K7gFCQmmI_m0do5-VpdXrXXLPQ8BCDMLc3Ew1Yk";
   const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-  (async () => {
-    try {
-const r = await fetch(SUPABASE_URL + "/rest/v1/", {
-  method: "GET",
-  headers: {
-    apikey: SUPABASE_ANON_KEY,
-    Authorization: "Bearer " + SUPABASE_ANON_KEY,
-  },
-});
-console.log("✅ Supabase reachable:", r.status);
-      console.log("✅ Supabase reachable:", r.status);
-    } catch (e) {
-      console.error("❌ Supabase NOT reachable:", e);
-      alert("❌ لا يمكن الوصول إلى رابط Supabase (DNS أو URL خطأ).");
-    }
-  })();
+  /* ── State ─────────────────────────────────────────────── */
+  let ALL_ORDERS   = [];
+  let ACTIVE_ORDER = null;
 
+  /* ── Constants ─────────────────────────────────────────── */
+  const PM_LABELS = {
+    carte_doree: "💳 البطاقة الذهبية",
+    baridimob:   "📱 BaridiMob",
+    ccp:         "🏦 CCP / RIP",
+  };
 
-  // =========================
-// ✅ AUTH GUARD (Protect admin page)
-// =========================
-async function requireAdminLogin() {
-  const { data, error } = await supabase.auth.getSession();
-  const session = data?.session;
-
-  // إذا لا توجد جلسة -> رجّع لصفحة الدخول
-  if (!session) {
-    const returnTo = encodeURIComponent(location.pathname + location.search);
-    location.href = `login.html?returnTo=${returnTo}`;
-    return false;
-  }
-
-  return true;
-}
-  // =========================
-  // DOM
-  // =========================
-  const refreshBtn = document.getElementById("refreshBtn");
-  const exportOrdersBtn = document.getElementById("exportOrdersBtn");
-  const exportMessagesBtn = document.getElementById("exportMessagesBtn");
-  const logoutBtn = document.getElementById("logoutBtn");
-
-  // ✅ 3 أقسام للطلبات
-  const ordersTbodyPending = document.getElementById("ordersTbodyPending");     // status = null
-  const ordersTbodyCancelled = document.getElementById("ordersTbodyCancelled"); // status = false
-  const ordersTbodyConfirmed = document.getElementById("ordersTbodyConfirmed"); // status = true
-
-  // ✅ رسائل
-  const messagesTbody = document.getElementById("messagesTbody");
-
-  const ordersSearch = document.getElementById("ordersSearch");
-  const messagesSearch = document.getElementById("messagesSearch");
-  const limitSelect = document.getElementById("limitSelect");
-
-  const modal = document.getElementById("modal");
-  const modalClose = document.getElementById("modalClose");
-  const modalTitle = document.getElementById("modalTitle");
-  const modalBody = document.getElementById("modalBody");
-
-  // =========================
-  // Logout
-  // =========================
-  logoutBtn?.addEventListener("click", async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (e) {
-      console.error(e);
-    }
-    location.href = "login.html";
-  });
-
-  // =========================
-  // State
-  // =========================
-  let ORDERS_CACHE = [];
-  let MESSAGES_CACHE = [];
-
-  // =========================
-  // Helpers
-  // =========================
-  function escapeHtml(str) {
-    return String(str ?? "")
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
+  /* ── Helpers ───────────────────────────────────────────── */
+  function esc(v) {
+    return String(v ?? "")
+      .replaceAll("&", "&amp;").replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;").replaceAll('"', "&quot;");
   }
 
   function fmtDate(v) {
-    if (!v) return "-";
-    try {
-      return new Date(v).toLocaleString("ar-DZ");
-    } catch {
-      return String(v);
-    }
+    if (!v) return "—";
+    return new Date(v).toLocaleString("ar-DZ", {
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit",
+    });
   }
 
   function fmtMoney(n) {
-    const x = Number(n || 0);
-    return x.toLocaleString("fr-DZ").replace(/\s+/g, "") + " دج";
+    return Number(n || 0).toLocaleString("fr-DZ") + " دج";
   }
 
-  // status: null / true / false (وقد يأتي نص)
-  function normBoolStatus(v) {
-    if (v === true || v === "true") return true;
-    if (v === false || v === "false") return false;
-    return null;
+  /* ─────────────────────────────────────────────────────────
+     حالة التأكيد — boolean
+     NULL  → قيد المعالجة
+     true  → تم التأكيد
+  ───────────────────────────────────────────────────────── */
+  function confirmBadge(isConfirmed) {
+    if (isConfirmed === true) {
+      return `<span class="badge badge-confirmed">✅ تم التأكيد</span>`;
+    }
+    return `<span class="badge badge-pending">⏳ قيد المعالجة</span>`;
   }
 
-  function badgeClass(status) {
-    const s = normBoolStatus(status);
-    if (s === true) return "confirmed";
-    if (s === false) return "cancelled";
-    return "new";
+  /* ─────────────────────────────────────────────────────────
+     AUTH GUARD
+  ───────────────────────────────────────────────────────── */
+  async function authGuard() {
+    const { data: { session } } = await supabase.auth.getSession();
+    if (!session) { location.href = "login.html"; return null; }
+
+    const { data: staff, error } = await supabase
+      .from("staff_accounts")
+      .select("id, full_name, role, is_active")
+      .eq("id", session.user.id)
+      .maybeSingle();
+
+    if (error || !staff || !staff.is_active || !["admin", "staff"].includes(staff.role)) {
+      await supabase.auth.signOut();
+      location.href = "login.html";
+      return null;
+    }
+    return staff;
   }
 
-  function statusLabel(status) {
-    const s = normBoolStatus(status);
-    if (s === true) return "مؤكد";
-    if (s === false) return "ملغى";
-    return "قيد المعالجة";
-  }
-
-  function showModal(title, html) {
-    modalTitle.textContent = title;
-    modalBody.innerHTML = html;
-    modal.classList.remove("hidden");
-  }
-
-  function hideModal() {
-    modal.classList.add("hidden");
-    modalBody.innerHTML = "";
-  }
-
-  modalClose?.addEventListener("click", hideModal);
-  modal?.addEventListener("click", (e) => {
-    if (e.target === modal) hideModal();
-  });
-
-  function downloadCSV(filename, rows) {
-    const csv = rows
-      .map((r) =>
-        r
-          .map((cell) => {
-            const v = String(cell ?? "");
-            return `"${v.replaceAll('"', '""')}"`;
-          })
-          .join(",")
-      )
-      .join("\n");
-
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = URL.createObjectURL(blob);
-
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = filename;
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    URL.revokeObjectURL(url);
-  }
-
-  // =========================
-  // Fetch
-  // =========================
+  /* ─────────────────────────────────────────────────────────
+     FETCH — الطلبات + منتجاتها في استعلام واحد
+  ───────────────────────────────────────────────────────── */
   async function fetchOrders() {
-    const limit = Number(limitSelect?.value || 50);
-
     const { data, error } = await supabase
       .from("orders")
-      .select("*")
+      .select(`
+        id, full_name, phone, address, wilaya, commune,
+        delivery_type, shipping_fee, subtotal, total_price,
+        payment_method, receipt_url, is_confirmed,
+        notes, created_at,
+        order_items ( product_name, unit_price, quantity, subtotal )
+      `)
       .order("created_at", { ascending: false })
-      .limit(limit);
+      .limit(500);
 
     if (error) throw error;
-    ORDERS_CACHE = Array.isArray(data) ? data : [];
+    return data || [];
   }
 
-  async function fetchMessages() {
-    const { data, error } = await supabase
-      .from("message")
-      .select("id,name,contact,message,created_at")
-      .order("created_at", { ascending: false })
-      .limit(200);
-
+  /* ─────────────────────────────────────────────────────────
+     CONFIRM — تحديث is_confirmed إلى true
+  ───────────────────────────────────────────────────────── */
+  async function confirmOrder(orderId) {
+    const { error } = await supabase
+      .from("orders")
+      .update({ is_confirmed: true })
+      .eq("id", orderId);
     if (error) throw error;
-    MESSAGES_CACHE = Array.isArray(data) ? data : [];
   }
 
-  // =========================
-  // Render Orders
-  // =========================
-  function filterOrders(list) {
-    const q = String(ordersSearch?.value || "").trim().toLowerCase();
-    return list.filter((o) => {
-      const hay =
-        `${o.full_name || ""} ${o.phone || ""} ${o.wilaya || ""} ${o.commune || ""} ${o.address || ""} ${o.items || ""}`
-          .toLowerCase();
-      return !q || hay.includes(q);
+  /* ─────────────────────────────────────────────────────────
+     DELETE — حذف الطلب (order_items تحذف تلقائياً بـ CASCADE)
+  ───────────────────────────────────────────────────────── */
+  async function deleteOrder(orderId) {
+    const { error } = await supabase
+      .from("orders")
+      .delete()
+      .eq("id", orderId);
+    if (error) throw error;
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     STATS — 3 بطاقات فقط
+  ───────────────────────────────────────────────────────── */
+  function renderStats(orders) {
+    const confirmed = orders.filter(o => o.is_confirmed === true).length;
+    const pending   = orders.length - confirmed;
+
+    document.getElementById("stat-all").textContent       = orders.length;
+    document.getElementById("stat-pending").textContent   = pending;
+    document.getElementById("stat-confirmed").textContent = confirmed;
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     FILTER
+  ───────────────────────────────────────────────────────── */
+  function getFiltered() {
+    const q  = document.getElementById("searchInput").value.trim().toLowerCase();
+    const st = document.getElementById("statusFilter").value; /* "pending" | "confirmed" | "" */
+
+    return ALL_ORDERS.filter(o => {
+      /* فلترة حسب الحالة */
+      if (st === "pending"   && o.is_confirmed === true)  return false;
+      if (st === "confirmed" && o.is_confirmed !== true)  return false;
+
+      /* بحث */
+      if (!q) return true;
+      const products = (o.order_items || []).map(it => it.product_name || "").join(" ").toLowerCase();
+      return (o.full_name || "").toLowerCase().includes(q) ||
+             (o.phone     || "").includes(q) ||
+             (o.wilaya    || "").toLowerCase().includes(q) ||
+             (o.commune   || "").toLowerCase().includes(q) ||
+             products.includes(q);
     });
   }
 
-  function orderDetailsHTML(o) {
-    const itemsText = Array.isArray(o.items) ? o.items.join("، ") : (o.items || "");
-    return `
-      <div class="box"><b>الاسم:</b> ${escapeHtml(o.full_name)}</div>
-      <div class="box"><b>الهاتف:</b> ${escapeHtml(o.phone)}</div>
-      <div class="box"><b>الولاية:</b> ${escapeHtml(o.wilaya)} | <b>البلدية:</b> ${escapeHtml(o.commune || "-")}</div>
-      <div class="box"><b>نوع التوصيل:</b> ${escapeHtml(o.delivery_type || "-")}</div>
-      <div class="box"><b>العنوان:</b><br>${escapeHtml(o.address || "-")}</div>
-      <div class="box"><b>الكتب:</b><br>${escapeHtml(itemsText || "-")}</div>
-      <div class="box"><b>مجموع الكتب:</b> ${fmtMoney(o.books_total)} | <b>التوصيل:</b> ${fmtMoney(o.shipping_fee)} | <b>الإجمالي:</b> ${fmtMoney(o.total_price)}</div>
-      <div class="box"><b>الحالة:</b> ${escapeHtml(statusLabel(o.status))}</div>
-      <div class="box"><b>التاريخ:</b> ${escapeHtml(fmtDate(o.created_at))}</div>
-    `;
-  }
+  /* ─────────────────────────────────────────────────────────
+     RENDER TABLE
+  ───────────────────────────────────────────────────────── */
+  function renderTable(orders) {
+    const tbody = document.getElementById("ordersTbody");
+    const cnt   = orders.length;
+    document.getElementById("ordersCount").textContent =
+      cnt + " طلب" + (cnt !== ALL_ORDERS.length ? ` (من ${ALL_ORDERS.length})` : "");
 
-  function renderOrders() {
-    const filtered = filterOrders(ORDERS_CACHE);
+    if (!cnt) {
+      tbody.innerHTML = `<tr><td colspan="10" class="empty">لا توجد طلبات مطابقة</td></tr>`;
+      return;
+    }
 
-    const pending = filtered.filter((o) => normBoolStatus(o.status) === null);
-    const cancelled = filtered.filter((o) => normBoolStatus(o.status) === false);
-    const confirmed = filtered.filter((o) => normBoolStatus(o.status) === true);
+    tbody.innerHTML = orders.map(o => {
+      const items     = o.order_items || [];
+      const confirmed = o.is_confirmed === true;
 
-    function rowHTML(o) {
-      const s = badgeClass(o.status);
+      /* المنتجات: اسم × كمية */
+      const productsHTML = items.length
+        ? items.map(it =>
+            `<span class="product-line">${esc(it.product_name)} <span class="product-qty">× ${esc(it.quantity)}</span></span>`
+          ).join("")
+        : `<span style="color:var(--text-muted);">—</span>`;
+
+      /* زر وصل الدفع */
+      const receiptBtn = o.receipt_url
+        ? `<a href="${esc(o.receipt_url)}" target="_blank" rel="noopener" class="btn-receipt">🧾 عرض الوصل</a>`
+        : `<span style="color:var(--text-muted);font-size:11px;">لا يوجد وصل</span>`;
+
+      /* زر التأكيد */
+      const confirmBtn = confirmed
+        ? `<button class="btn-confirm" disabled>✔ تم التأكيد</button>`
+        : `<button class="btn-confirm" data-id="${esc(o.id)}" data-action="confirm">✅ تأكيد الطلب</button>`;
+
       return `
-        <tr data-id="${escapeHtml(o.id)}">
-          <td data-label="التاريخ">${escapeHtml(fmtDate(o.created_at))}</td>
-          <td data-label="الاسم">${escapeHtml(o.full_name || "-")}</td>
-          <td data-label="الهاتف">${escapeHtml(o.phone || "-")}</td>
-          <td data-label="الولاية">${escapeHtml(o.wilaya || "-")}</td>
-          <td data-label="البلدية">${escapeHtml(o.commune || "-")}</td>
-          <td data-label="نوع التوصيل">${escapeHtml(o.delivery_type || "-")}</td>
-          <td data-label="التوصيل">${escapeHtml(fmtMoney(o.shipping_fee))}</td>
-          <td data-label="المجموع">${escapeHtml(fmtMoney(o.total_price))}</td>
-          <td data-label="الحالة">
-            <span class="badge ${s}">${escapeHtml(statusLabel(o.status))}</span>
-          </td>
-          <td data-label="إجراءات">
-            <div class="row-actions">
-              <button class="icon-btn viewBtn" title="عرض التفاصيل">👁️</button>
+        <tr data-id="${esc(o.id)}">
+          <td class="nowrap"><strong>${esc(o.full_name || "—")}</strong></td>
+          <td class="nowrap" style="direction:ltr;">${esc(o.phone || "—")}</td>
+          <td class="nowrap">${esc(o.wilaya || "—")}</td>
+          <td class="nowrap">${esc(o.commune || "—")}</td>
+          <td class="td-address">${esc(o.address || "—")}</td>
+          <td class="td-products">${productsHTML}</td>
+          <td class="nowrap"><strong style="color:#1d4ed8;">${esc(fmtMoney(o.total_price))}</strong></td>
+          <td class="nowrap"><span class="pm-tag">${esc(PM_LABELS[o.payment_method] || o.payment_method || "—")}</span></td>
+          <td class="nowrap">${confirmBadge(o.is_confirmed)}</td>
+          <td class="td-actions">
+            <div class="actions-col">
+              ${receiptBtn}
+              ${confirmBtn}
+              <button class="btn-delete" data-id="${esc(o.id)}" data-action="delete">🗑 حذف الطلب</button>
             </div>
           </td>
-        </tr>
-      `;
-    }
+        </tr>`;
+    }).join("");
+  }
 
-    if (ordersTbodyPending) {
-      ordersTbodyPending.innerHTML = pending.length
-        ? pending.map(rowHTML).join("")
-        : `<tr><td colspan="10" class="muted center">لا توجد طلبات غير مراجعة</td></tr>`;
-    }
+  /* ─────────────────────────────────────────────────────────
+     HANDLE CONFIRM
+  ───────────────────────────────────────────────────────── */
+  async function handleConfirm(orderId, btn) {
+    btn.disabled    = true;
+    btn.textContent = "⏳ جاري التأكيد...";
 
-    if (ordersTbodyCancelled) {
-      ordersTbodyCancelled.innerHTML = cancelled.length
-        ? cancelled.map(rowHTML).join("")
-        : `<tr><td colspan="10" class="muted center">لا توجد طلبات ملغاة</td></tr>`;
-    }
+    try {
+      await confirmOrder(orderId);
 
-    if (ordersTbodyConfirmed) {
-      ordersTbodyConfirmed.innerHTML = confirmed.length
-        ? confirmed.map(rowHTML).join("")
-        : `<tr><td colspan="10" class="muted center">لا توجد طلبات مؤكدة</td></tr>`;
+      /* تحديث الكاش */
+      const order = ALL_ORDERS.find(o => o.id === orderId);
+      if (order) order.is_confirmed = true;
+
+      /* تحديث الصف مباشرة */
+      const row = document.querySelector(`#ordersTbody tr[data-id="${orderId}"]`);
+      if (row) {
+        row.cells[8].innerHTML = confirmBadge(true);           /* حالة التأكيد */
+        btn.textContent = "✔ تم التأكيد";                     /* زر التأكيد */
+        btn.removeAttribute("data-action");
+      }
+
+      renderStats(ALL_ORDERS);
+      if (ACTIVE_ORDER?.id === orderId) { ACTIVE_ORDER.is_confirmed = true; }
+
+    } catch (err) {
+      console.error("Confirm error:", err);
+      alert("❌ خطأ في تأكيد الطلب:\n" + (err.message || ""));
+      btn.disabled    = false;
+      btn.textContent = "✅ تأكيد الطلب";
     }
   }
 
-  // =========================
-  // Render Messages
-  // =========================
-  function filterMessages(list) {
-    const q = String(messagesSearch?.value || "").trim().toLowerCase();
-    if (!q) return list;
-    return list.filter((m) => {
-      const hay = `${m.name || ""} ${m.contact || ""} ${m.message || ""}`.toLowerCase();
-      return hay.includes(q);
+  /* ─────────────────────────────────────────────────────────
+     HANDLE DELETE
+  ───────────────────────────────────────────────────────── */
+  async function handleDelete(orderId, btn) {
+    const order = ALL_ORDERS.find(o => o.id === orderId);
+    const name  = order?.full_name || "هذا الطلب";
+
+    if (!confirm(`هل أنت متأكد من حذف طلب "${name}"؟\nسيُحذف الطلب ومنتجاته نهائياً ولا يمكن التراجع.`)) return;
+
+    btn.disabled    = true;
+    btn.textContent = "⏳...";
+
+    try {
+      await deleteOrder(orderId);
+
+      /* إزالة من الكاش والجدول */
+      ALL_ORDERS = ALL_ORDERS.filter(o => o.id !== orderId);
+      document.querySelector(`#ordersTbody tr[data-id="${orderId}"]`)?.remove();
+
+      /* تحديث العداد والإحصائيات */
+      const filtered = getFiltered();
+      document.getElementById("ordersCount").textContent =
+        filtered.length + " طلب" + (filtered.length !== ALL_ORDERS.length ? ` (من ${ALL_ORDERS.length})` : "");
+      renderStats(ALL_ORDERS);
+
+      if (!ALL_ORDERS.length) {
+        document.getElementById("ordersTbody").innerHTML =
+          `<tr><td colspan="10" class="empty">لا توجد طلبات</td></tr>`;
+      }
+
+      if (ACTIVE_ORDER?.id === orderId) closeModal();
+
+    } catch (err) {
+      console.error("Delete error:", err);
+      alert("❌ خطأ في الحذف:\n" + (err.message || ""));
+      btn.disabled    = false;
+      btn.textContent = "🗑 حذف الطلب";
+    }
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     MODAL — تفاصيل كاملة
+  ───────────────────────────────────────────────────────── */
+  function openModal()  { document.getElementById("modal").classList.add("open"); }
+  function closeModal() {
+    document.getElementById("modal").classList.remove("open");
+    ACTIVE_ORDER = null;
+  }
+
+  function showOrderModal(orderId) {
+    const order = ALL_ORDERS.find(o => o.id === orderId);
+    if (!order) return;
+    ACTIVE_ORDER = order;
+    document.getElementById("modalTitle").textContent = "طلب: " + (order.full_name || "—");
+    document.getElementById("modalBody").innerHTML = buildModalHTML(order);
+    openModal();
+  }
+
+  function buildModalHTML(o) {
+    const items      = o.order_items || [];
+    const confirmed  = o.is_confirmed === true;
+
+    const itemsHTML = items.length
+      ? `<table class="items-table">
+           <thead><tr><th>المنتج</th><th>السعر</th><th>الكمية</th><th>الإجمالي</th></tr></thead>
+           <tbody>
+             ${items.map(it => `
+               <tr>
+                 <td>${esc(it.product_name)}</td>
+                 <td style="direction:ltr;">${esc(fmtMoney(it.unit_price))}</td>
+                 <td style="text-align:center;font-weight:800;">${esc(it.quantity)}</td>
+                 <td style="direction:ltr;font-weight:800;color:#1d4ed8;">${esc(fmtMoney(it.subtotal))}</td>
+               </tr>`).join("")}
+           </tbody>
+           <tfoot>
+             <tr>
+               <td colspan="3">الإجمالي الكلي</td>
+               <td style="direction:ltr;color:#1d4ed8;">${esc(fmtMoney(o.total_price))}</td>
+             </tr>
+           </tfoot>
+         </table>`
+      : `<p style="color:var(--text-muted);font-size:13px;text-align:center;padding:12px 0;">لا توجد منتجات</p>`;
+
+    const receiptSection = o.receipt_url
+      ? `<a href="${esc(o.receipt_url)}" target="_blank" rel="noopener" class="btn-receipt" style="font-size:14px;padding:10px 20px;">
+           🧾 فتح وصل الدفع في نافذة جديدة
+         </a>`
+      : `<span style="color:var(--text-muted);font-size:13px;">لا يوجد وصل دفع مرفوع</span>`;
+
+    return `
+      <div class="m-section">
+        <div class="m-title">معلومات الزبون والتوصيل</div>
+        <div class="info-grid">
+          <div class="info-item"><span class="i-lbl">الاسم</span><span class="i-val">${esc(o.full_name || "—")}</span></div>
+          <div class="info-item"><span class="i-lbl">الهاتف</span><span class="i-val" style="direction:ltr;">${esc(o.phone || "—")}</span></div>
+          <div class="info-item"><span class="i-lbl">الولاية</span><span class="i-val">${esc(o.wilaya || "—")}</span></div>
+          <div class="info-item"><span class="i-lbl">البلدية</span><span class="i-val">${esc(o.commune || "—")}</span></div>
+          <div class="info-item full"><span class="i-lbl">العنوان</span><span class="i-val" style="white-space:normal;line-height:1.6;">${esc(o.address || "—")}</span></div>
+          <div class="info-item"><span class="i-lbl">طريقة الدفع</span><span class="i-val">${esc(PM_LABELS[o.payment_method] || o.payment_method || "—")}</span></div>
+          <div class="info-item"><span class="i-lbl">تاريخ الطلب</span><span class="i-val" style="font-size:12px;">${esc(fmtDate(o.created_at))}</span></div>
+        </div>
+      </div>
+
+      <div class="m-section">
+        <div class="m-title">المنتجات المطلوبة</div>
+        ${itemsHTML}
+      </div>
+
+      <div class="m-section">
+        <div class="m-title">وصل الدفع</div>
+        ${receiptSection}
+      </div>
+
+      ${o.notes ? `
+      <div class="m-section">
+        <div class="m-title">ملاحظات الزبون</div>
+        <div style="background:#fef9c3;border:1px solid #fde68a;border-radius:10px;padding:14px;font-size:14px;color:#78350f;line-height:1.7;">${esc(o.notes)}</div>
+      </div>` : ""}
+
+      <div class="m-section">
+        <div class="m-title">الإجراءات</div>
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+          <span>الحالة: ${confirmBadge(o.is_confirmed)}</span>
+          ${confirmed
+            ? `<button class="btn-confirm" disabled style="font-size:14px;padding:10px 22px;">✔ تم التأكيد</button>`
+            : `<button class="btn-confirm" data-id="${esc(o.id)}" data-action="confirm"
+                       style="font-size:14px;padding:10px 22px;">✅ تأكيد الطلب</button>`
+          }
+          <button class="btn-delete" data-id="${esc(o.id)}" data-action="delete"
+                  style="font-size:14px;padding:10px 22px;">🗑 حذف الطلب</button>
+        </div>
+      </div>`;
+  }
+
+  /* ─────────────────────────────────────────────────────────
+     EVENTS
+  ───────────────────────────────────────────────────────── */
+  function bindEvents() {
+
+    document.getElementById("logoutBtn").addEventListener("click", async () => {
+      await supabase.auth.signOut();
+      location.href = "login.html";
+    });
+
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    document.getElementById("modal").addEventListener("click", e => {
+      if (e.target.id === "modal") closeModal();
+    });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal(); });
+
+    document.getElementById("searchInput").addEventListener("input",  () => renderTable(getFiltered()));
+    document.getElementById("statusFilter").addEventListener("change", () => renderTable(getFiltered()));
+
+    document.getElementById("refreshBtn").addEventListener("click", async () => {
+      const btn = document.getElementById("refreshBtn");
+      btn.disabled = true; btn.textContent = "⏳ جاري التحديث...";
+      try {
+        ALL_ORDERS = await fetchOrders();
+        renderStats(ALL_ORDERS);
+        renderTable(getFiltered());
+      } catch (err) { alert("❌ فشل التحديث: " + (err.message || "")); }
+      btn.disabled = false; btn.textContent = "↻ تحديث";
+    });
+
+    /* Event delegation — جدول الطلبات */
+    document.getElementById("ordersTbody").addEventListener("click", async e => {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      if (btn.dataset.action === "confirm") await handleConfirm(btn.dataset.id, btn);
+      if (btn.dataset.action === "delete")  await handleDelete(btn.dataset.id, btn);
+    });
+
+    /* Event delegation — المودال */
+    document.getElementById("modalBody").addEventListener("click", async e => {
+      const btn = e.target.closest("[data-action]");
+      if (!btn) return;
+      if (btn.dataset.action === "confirm") await handleConfirm(btn.dataset.id, btn);
+      if (btn.dataset.action === "delete")  await handleDelete(btn.dataset.id, btn);
     });
   }
 
-  function renderMessages() {
-    const list = filterMessages(MESSAGES_CACHE);
-    if (!messagesTbody) return;
-
-    if (!list.length) {
-      messagesTbody.innerHTML = `<tr><td colspan="5" class="muted center">لا توجد رسائل مطابقة</td></tr>`;
-      return;
-    }
-
-    messagesTbody.innerHTML = list
-      .map((m) => {
-        const msgShort = String(m.message || "-");
-        const trimmed = msgShort.length > 80 ? msgShort.slice(0, 80) + "..." : msgShort;
-
-        return `
-          <tr data-id="${escapeHtml(m.id)}">
-            <td data-label="التاريخ">${escapeHtml(fmtDate(m.created_at))}</td>
-            <td data-label="الاسم">${escapeHtml(m.name || "-")}</td>
-            <td data-label="الهاتف">${escapeHtml(m.contact || "-")}</td>
-            <td data-label="الرسالة" title="${escapeHtml(msgShort)}">${escapeHtml(trimmed)}</td>
-            <td data-label="إجراءات">
-              <div class="row-actions">
-                <button class="icon-btn viewMsgBtn" title="عرض الرسالة">👁️</button>
-                <button class="icon-btn delMsgBtn" title="حذف الرسالة">🗑️</button>
-              </div>
-            </td>
-          </tr>
-        `;
-      })
-      .join("");
-  }
-
-  // =========================
-  // Actions: Messages
-  // =========================
-  async function deleteMessage(msgId) {
-    const { error } = await supabase.from("message").delete().eq("id", msgId);
-    if (error) throw error;
-  }
-
-  // =========================
-  // Events
-  // =========================
-  refreshBtn?.addEventListener("click", () => boot(true));
-  ordersSearch?.addEventListener("input", renderOrders);
-  limitSelect?.addEventListener("change", () => boot(true));
-  messagesSearch?.addEventListener("input", renderMessages);
-
-  async function onOrdersClick(e) {
-    const tr = e.target.closest("tr");
-    if (!tr) return;
-
-    const orderId = tr.getAttribute("data-id");
-    const order = ORDERS_CACHE.find((x) => String(x.id) === String(orderId));
-
-    if (e.target.closest(".viewBtn")) {
-      if (!order) return;
-      showModal(`تفاصيل الطلب: ${order.full_name || ""}`, orderDetailsHTML(order));
-    }
-  }
-
-  ordersTbodyPending?.addEventListener("click", onOrdersClick);
-  ordersTbodyCancelled?.addEventListener("click", onOrdersClick);
-  ordersTbodyConfirmed?.addEventListener("click", onOrdersClick);
-
-  messagesTbody?.addEventListener("click", async (e) => {
-    const tr = e.target.closest("tr");
-    if (!tr) return;
-
-    const msgId = tr.getAttribute("data-id");
-    const msg = MESSAGES_CACHE.find((x) => String(x.id) === String(msgId));
-
-    if (e.target.closest(".viewMsgBtn")) {
-      if (!msg) return;
-      showModal(
-        "تفاصيل الرسالة",
-        `
-        <div class="box"><b>الاسم:</b> ${escapeHtml(msg.name)}</div>
-        <div class="box"><b>الهاتف:</b> ${escapeHtml(msg.contact)}</div>
-        <div class="box"><b>الرسالة:</b><br>${escapeHtml(msg.message)}</div>
-        <div class="box"><b>التاريخ:</b> ${escapeHtml(fmtDate(msg.created_at))}</div>
-      `
-      );
-      return;
-    }
-
-    if (e.target.closest(".delMsgBtn")) {
-      if (!confirm("هل أنت متأكد من حذف الرسالة؟")) return;
-      try {
-        await deleteMessage(msgId);
-        MESSAGES_CACHE = MESSAGES_CACHE.filter((x) => String(x.id) !== String(msgId));
-        renderMessages();
-        alert("✅ تم حذف الرسالة");
-      } catch (err) {
-        console.error(err);
-        alert("❌ خطأ في حذف الرسالة: " + (err?.message || JSON.stringify(err)));
-      }
-    }
-  });
-
-  // =========================
-  // Export
-  // =========================
-  exportOrdersBtn?.addEventListener("click", () => {
-    const rows = [
-      ["created_at", "full_name", "phone", "wilaya", "commune", "delivery_type", "shipping_fee", "books_total", "total_price", "status", "address", "items"],
-      ...ORDERS_CACHE.map((o) => [
-        o.created_at,
-        o.full_name,
-        o.phone,
-        o.wilaya,
-        o.commune,
-        o.delivery_type,
-        o.shipping_fee,
-        o.books_total,
-        o.total_price,
-        o.status,
-        o.address,
-        o.items,
-      ]),
-    ];
-    downloadCSV("orders.csv", rows);
-  });
-
-  exportMessagesBtn?.addEventListener("click", () => {
-    const rows = [
-      ["created_at", "name", "contact", "message"],
-      ...MESSAGES_CACHE.map((m) => [m.created_at, m.name, m.contact, m.message]),
-    ];
-    downloadCSV("messages.csv", rows);
-  });
-
-  // =========================
-  // Boot
-  // =========================
-  async function boot(showAlerts) {
+  /* ─────────────────────────────────────────────────────────
+     BOOT
+  ───────────────────────────────────────────────────────── */
+  async function boot() {
     try {
-      if (ordersTbodyPending) ordersTbodyPending.innerHTML = `<tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>`;
-      if (ordersTbodyCancelled) ordersTbodyCancelled.innerHTML = `<tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>`;
-      if (ordersTbodyConfirmed) ordersTbodyConfirmed.innerHTML = `<tr><td colspan="10" class="muted center">... جاري التحميل</td></tr>`;
-      if (messagesTbody) messagesTbody.innerHTML = `<tr><td colspan="5" class="muted center">... جاري التحميل</td></tr>`;
+      const staff = await authGuard();
+      if (!staff) return;
 
-      await Promise.all([fetchOrders(), fetchMessages()]);
-      renderOrders();
-      renderMessages();
+      document.getElementById("adminBadge").textContent =
+        (staff.role === "admin" ? "👑 Admin" : "👤 Staff") +
+        (staff.full_name ? " — " + staff.full_name : "");
 
-      if (showAlerts) console.log("✅ Refreshed");
+      ALL_ORDERS = await fetchOrders();
+      renderStats(ALL_ORDERS);
+      renderTable(ALL_ORDERS);
+      bindEvents();
+
     } catch (err) {
-      console.error(err);
-      const msg = err?.message || JSON.stringify(err);
-
-      if (ordersTbodyPending) ordersTbodyPending.innerHTML = `<tr><td colspan="10" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
-      if (ordersTbodyCancelled) ordersTbodyCancelled.innerHTML = `<tr><td colspan="10" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
-      if (ordersTbodyConfirmed) ordersTbodyConfirmed.innerHTML = `<tr><td colspan="10" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
-      if (messagesTbody) messagesTbody.innerHTML = `<tr><td colspan="5" class="muted center">❌ خطأ: ${escapeHtml(msg)}</td></tr>`;
-
-      alert("❌ مشكلة في جلب البيانات من Supabase.\n\n" + msg + "\n\n✅ تأكد من السياسات (RLS) أو أن المستخدم مسجل دخول.");
+      console.error("Boot error:", err);
+      alert("❌ خطأ في تحميل لوحة التحكم:\n" + (err.message || JSON.stringify(err)));
     }
   }
 
-  // =========================
-  // ✅ Start only after guard
-  // =========================
-  (async () => {
-    const ok = await requireAdminLogin();
-    if (!ok) return;
-    boot(false);
-  })();
+  boot();
+
 })();

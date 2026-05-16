@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Electronics Components Kit Project Starter — Derradj Shop</title>
+  <meta name="description" content="Electronics Components Kit Project Starter Electronic DIY Kit With 830 Tie-points Breadboard For Arduino R3 With Box — 7,000 DA. مناسب للطلاب، مشاريع Arduino، التجارب التطبيقية، ومشاريع DIY. توصيل لجميع ولايات الجزائر.">
+  <link rel="icon" type="image/png" href="../../Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../style.css" />
+</head>
+<body>
+
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="../../index.html" class="logo">
+      <span>Derradj <span class="logo-accent">Shop</span></span>
+    </a>
+    <nav class="main-nav">
+      <a href="../../index.html#products"  class="nav-link">المنتجات</a>
+      <a href="../../about.html"           class="nav-link">من نحن</a>
+      <a href="../../delivery.html"        class="nav-link">التوصيل</a>
+      <a href="../../faq.html"             class="nav-link">الأسئلة الشائعة</a>
+      <a href="../../contact.html"         class="nav-link">تواصل معنا</a>
+    </nav>
+    <a href="../../ordre/index.html" class="btn-header-cta">🛒 اطلب الآن</a>
+  </div>
+</header>
+
+<main class="product-page">
+  <div class="container">
+
+    <div class="breadcrumb">
+      <a href="../../index.html">الرئيسية</a>
+      <span>›</span>
+      <a href="../../index.html#products">المنتجات</a>
+      <span>›</span>
+      <span>Electronics Components Kit Starter</span>
+    </div>
+
+    <div class="product-hero-grid">
+
+<!-- صور المنتج -->
+<div class="product-img-gallery">
+
+  <!-- الصور المصغرة -->
+  <div class="product-thumbnails-vertical">
+    <button class="product-thumb active" onclick="changeProductImage(0)">
+      <img src="pictures/main-1.jpg" alt="صورة المنتج 1">
+    </button>
+
+    <button class="product-thumb" onclick="changeProductImage(1)">
+      <img src="pictures/main-2.jpg" alt="صورة المنتج 2">
+    </button>
+
+    <button class="product-thumb" onclick="changeProductImage(2)">
+      <img src="pictures/main-3.jpg" alt="صورة المنتج 3">
+    </button>
+
+    <button class="product-thumb" onclick="changeProductImage(3)">
+      <img src="pictures/main-4.jpg" alt="صورة المنتج 4">
+    </button>
+  </div>
+
+  <!-- الصورة الكبيرة -->
+  <div class="product-main-image-box" onclick="openImageZoom()">
+    <img
+      id="mainProductImage"
+      src="pictures/main-1.jpg"
+      alt="Electronics Components Kit"
+      class="product-main-image"
+    />
+
+    <div class="zoom-hint">🔍 اضغط للتكبير</div>
+  </div>
+
+</div>
+
+<!-- نافذة تكبير الصورة -->
+<div id="imageZoomModal" class="image-zoom-modal">
+  <button class="zoom-close" onclick="closeImageZoom()">×</button>
+
+  <button class="zoom-arrow zoom-prev" onclick="prevImage(event)">‹</button>
+
+  <img
+    id="zoomedProductImage"
+    src="pictures/main-1.jpg"
+    alt="صورة المنتج مكبرة"
+    class="zoomed-product-image"
+  />
+
+  <button class="zoom-arrow zoom-next" onclick="nextImage(event)">›</button>
+</div>
+      <!-- تفاصيل المنتج -->
+      <div class="product-details">
+        <div class="product-cat-label">Electronics Components Kit — Arduino DIY Starter</div>
+        <h1>Electronics Components Kit Project Starter Electronic DIY Kit With 830 Tie-points Breadboard For Arduino R3 With Box</h1>
+
+        <div class="product-rating">
+          <span class="product-stars" style="color:#f59e0b;font-size:18px;">★★★★★</span>
+          <span style="font-size:14px;color:#64748b;">جودة ممتازة مضمونة</span>
+        </div>
+
+        <div class="product-price-box">
+          <span class="price-current">7,000 DA</span>
+          <span style="font-size:15px;color:#64748b;margin-right:8px;">/ علبة واحدة</span>
+        </div>
+
+        <p class="product-short-desc">
+          طقم إلكترونيات مثالي للمبتدئين والطلاب الجامعيين الذين يريدون البدء في مشاريع Arduino وDIY الإلكترونية.
+          يأتي في علبة منظمة تحتوي على لوحة Breadboard ذات 830 نقطة توصيل مع مجموعة من المكونات الإلكترونية الأساسية.
+          مناسب للتجارب التطبيقية المخبرية، مشاريع Arduino، ومشاريع التخرج الجامعية.
+        </p>
+
+        <div class="product-features">
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>830 Tie-points Breadboard — لوحة تجارب كبيرة 830 نقطة لبناء الدوائر بدون لحام</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>Switch Potentiometer × 1 — مقاوم متغير للتحكم في القيم الكهربائية</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>Buzzer × 1 — جرس إلكتروني للتنبيهات والمشاريع الصوتية</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>LED Components — مكونات LED متنوعة للمشاريع الضوئية والإشارات البصرية</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>متوافق مع Arduino R3 وجميع متحكمات Arduino الشائعة</span>
+          </div>
+          <div class="product-feature">
+            <span class="feature-check">✓</span>
+            <span>يأتي في علبة منظمة — سهل التخزين والنقل</span>
+          </div>
+        </div>
+
+        <div class="product-cta-buttons">
+          <a href="../../ordre/index.html" class="btn-buy-now">
+            ⚡ اطلب الآن — 7,000 DA
+          </a>
+          <a href="../../contact.html" class="btn-order-product">
+            💬 استفسر عن المنتج
+          </a>
+        </div>
+
+        <div class="trust-badges">
+          <div class="trust-badge">
+            <strong>🚚 التوصيل</strong>
+            15 يوم – شهر
+          </div>
+          <div class="trust-badge">
+            <strong>💳 الدفع</strong>
+            بطاقة ذهبية مسبقاً
+          </div>
+          <div class="trust-badge">
+            <strong>🛡️ الضمان</strong>
+            مضمون 100%
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- تفاصيل المنتج -->
+    <div style="margin-top:60px;display:grid;grid-template-columns:1fr 1fr;gap:28px;">
+      <div class="info-card">
+        <h2>📦 محتويات العلبة</h2>
+        <ul>
+          <li>Breadboard 830 Tie-points (لوحة تجارب 830 نقطة) × 1</li>
+          <li>Switch Potentiometer (مقاوم متغير) × 1</li>
+          <li>Buzzer (جرس إلكتروني) × 1</li>
+          <li>LED Components (مكونات LED) × مجموعة</li>
+          <li>علبة تخزين منظمة × 1</li>
+        </ul>
+      </div>
+      <div class="info-card">
+        <h2>🎓 مناسب لمن؟</h2>
+        <ul>
+          <li>طلاب الهندسة الكهربائية والإلكترونيك</li>
+          <li>مشاريع Arduino للمبتدئين</li>
+          <li>التجارب التطبيقية المخبرية الجامعية</li>
+          <li>مشاريع التخرج الجامعية</li>
+          <li>هواة الإلكترونيات وDIY</li>
+          <li>طلاب التحكم الآلي والأتمتة</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- معلومات الطلب -->
+    <div style="margin-top:28px;">
+      <div class="info-card">
+        <h2>ℹ️ معلومات الطلب والتوصيل</h2>
+        <ul>
+          <li><strong>السعر:</strong> 7,000 دينار جزائري للعلبة الواحدة (لا تشمل رسوم التوصيل)</li>
+          <li><strong>طريقة الدفع:</strong> دفع مسبق عبر البطاقة الذهبية (CIB / Edahabia) — لا يُشحن الطلب إلا بعد تأكيد الدفع</li>
+          <li><strong>مدة التوصيل:</strong> من 15 يوم إلى شهر كامل لجميع ولايات الجزائر الـ 58</li>
+          <li><strong>الضمان:</strong> ضمان كامل على المنتج — استرجاع المال أو إرسال بديل في حال وجود عيب</li>
+          <li><strong>التغليف:</strong> تغليف آمن ومحكم يحمي المكونات أثناء الشحن</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="main-footer" style="margin-top:60px;">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="../../index.html" class="footer-logo">
+        <span>Derradj <span class="logo-accent">Shop</span></span>
+      </a>
+      <p>متجر جزائري متخصص في أطقم Arduino والمكونات الإلكترونية.</p>
+    </div>
+    <div class="footer-links-col">
+      <h4>روابط سريعة</h4>
+      <ul>
+        <li><a href="../../index.html">الرئيسية</a></li>
+        <li><a href="../../about.html">من نحن</a></li>
+        <li><a href="../../delivery.html">سياسة التوصيل</a></li>
+        <li><a href="../../payment.html">الدفع والضمان</a></li>
+        <li><a href="../../faq.html">الأسئلة الشائعة</a></li>
+        <li><a href="../../contact.html">تواصل معنا</a></li>
+      </ul>
+    </div>
+    <div class="footer-links-col">
+      <h4>تواصل</h4>
+      <div class="footer-contact-list">
+        <a href="tel:+213555491316">📞 0555 49 13 16</a>
+        <a href="mailto:derradjshop@gmail.com">📧 derradjshop@gmail.com</a>
+      </div>
+    </div>
+    <div class="footer-links-col">
+      <h4>الدفع</h4>
+      <div class="footer-pay-badge">💳 البطاقة الذهبية</div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Derradj Shop — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
+
+<script>
+  window.addEventListener('scroll', () => {
+    document.getElementById('mainHeader').classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
+</script>
+<script>
+  const productImages = [
+    "pictures/main-1.jpg",
+    "pictures/main-2.jpg",
+    "pictures/main-3.jpg",
+    "pictures/main-4.jpg"
+  ];
+
+  let currentImageIndex = 0;
+
+  function changeProductImage(index) {
+    currentImageIndex = index;
+
+    const mainImage = document.getElementById("mainProductImage");
+    const zoomedImage = document.getElementById("zoomedProductImage");
+
+    mainImage.src = productImages[index];
+    zoomedImage.src = productImages[index];
+
+    document.querySelectorAll(".product-thumb").forEach((thumb, i) => {
+      thumb.classList.toggle("active", i === index);
+    });
+  }
+
+  function openImageZoom() {
+    const modal = document.getElementById("imageZoomModal");
+    const zoomedImage = document.getElementById("zoomedProductImage");
+
+    zoomedImage.src = productImages[currentImageIndex];
+    modal.classList.add("active");
+  }
+
+  function closeImageZoom() {
+    document.getElementById("imageZoomModal").classList.remove("active");
+  }
+
+  function nextImage(event) {
+    event.stopPropagation();
+    currentImageIndex = (currentImageIndex + 1) % productImages.length;
+    changeProductImage(currentImageIndex);
+    openImageZoom();
+  }
+
+  function prevImage(event) {
+    event.stopPropagation();
+    currentImageIndex =
+      (currentImageIndex - 1 + productImages.length) % productImages.length;
+    changeProductImage(currentImageIndex);
+    openImageZoom();
+  }
+
+  document.getElementById("imageZoomModal").addEventListener("click", closeImageZoom);
+
+  document.addEventListener("keydown", function(event) {
+    if (event.key === "Escape") {
+      closeImageZoom();
+    }
+  });
+</script>
+</body>
+</html>

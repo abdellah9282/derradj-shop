@@ -1,645 +1,516 @@
 <!DOCTYPE html>
-<html lang="en" translate="no">
+<html lang="ar" dir="rtl">
 <head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NME3KN9N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N4NME3KN9N');
+  </script>
 
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NME3KN9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-N4NME3KN9N');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
- <title>Derradj Shop – متجر الكتب الورقية</title>
+  <title>Derradj Shop – متجر Arduino والمكونات الإلكترونية في الجزائر</title>
 
-<meta name="description" content="Derradj Shop متجر جزائري لبيع الكتب الورقية. اطلب بسهولة عبر استمارة، توصيل لجميع الولايات، ودفع عند الاستلام. كتب جامعية وتنمية وروايات وغيرها.">
+  <meta name="description" content="Derradj Shop – متجر جزائري متخصص في أطقم Arduino، المكونات الإلكترونية، Breadboards، Sensors، أدوات القياس، ومستلزمات مشاريع DIY والتخرج. أسعار منافسة، توصيل لجميع الولايات، دفع بالبطاقة الذهبية.">
 
-<meta property="og:title" content="Derradj Shop – متجر الكتب الورقية">
-<meta property="og:description" content="متجر جزائري لبيع الكتب الورقية: طلب سريع عبر استمارة، توصيل لكل الولايات، ودفع عند الاستلام.">
-<meta property="og:url" content="https://www.derradjshop.com">
-<meta property="og:image" content="https://www.derradjshop.com/Logo.jpg">
+  <meta property="og:title"       content="Derradj Shop – متجر Arduino والمكونات الإلكترونية في الجزائر">
+  <meta property="og:description" content="أطقم Arduino، Breadboards، Sensors، مكونات إلكترونية وكهربائية بأسعار منافسة. توصيل لكل الجزائر — دفع بالبطاقة الذهبية.">
+  <meta property="og:url"         content="https://www.derradjshop.com">
+  <meta property="og:image"       content="https://www.derradjshop.com/Logo.jpg">
+  <meta property="og:site_name"   content="Derradj Shop">
 
-<meta name="twitter:title" content="Derradj Shop – متجر الكتب الورقية">
-<meta name="twitter:description" content="اطلب كتب ورقية بسهولة مع التوصيل داخل الجزائر والدفع عند الاستلام.">
-<meta name="twitter:image" content="https://www.derradjshop.com/Logo.jpg">
+  <meta name="keywords" content="Arduino الجزائر, مكونات إلكترونية الجزائر, Derradj Shop, Breadboard الجزائر, Sensors Arduino, مشاريع تخرج الجزائر, طلاب هندسة كهربائية, DIY الجزائر, أطقم Arduino للمبتدئين">
+  <meta name="author" content="Derradj Shop">
 
-<meta name="keywords" content="
-Derradj Shop, متجر كتب الجزائر, بيع الكتب أونلاين الجزائر, كتب جامعية, كتب تنمية, كتب روايات,
-توصيل كتب لكل الولايات, الدفع عند الاستلام, مكتبة الجزائر, شراء كتب ورقية, كتب PDF لا (ورقية فقط)
-">
+  <link rel="canonical" href="https://www.derradjshop.com/">
+  <link rel="icon" type="image/png" href="Logo.png">
+  <link rel="manifest" href="manifest.json">
 
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 
-<meta name="author" content="Derradj Shop">
-<meta property="og:site_name" content="Derradj Shop">
-<link rel="canonical" href="https://www.derradjshop.com/">
-
-
-<link rel="stylesheet" href="style.css" />
-<script src="js/search.js" defer></script>
-
-<!-- === FAVICON === -->
-<link rel="icon" type="image/jpeg" href="Logo.png">
-
-<meta name="keywords" content="
-Derradj Academy, Abdellah Derradj, Algerian University Courses, Algerian E-learning Platform,
-Cours universitaires Algérie, Algeria university, Education platform,
-TDs, Exams, PDF lessons, Live sessions, Online learning Algeria,
-Algerian students, Study anywhere anytime, Platforme universitaire Algérie, Supabase courses, Derradj Academy platform
-">
-
-<!-- Social Sharing Description -->
-<meta property="og:locale" content="en_US">
-<meta name="author" content="Abdellah Derradj">
-
-
-<!-- ✅ Sitemap -->
-<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
-
-<!-- ✅ Canonical -->
-<link rel="canonical" href="https://www.derradjshop.com/">
-
-<!-- ✅ Open Graph Enhancements -->
-<meta property="og:site_name" content="Derradj Academy">
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-F5XDHSVTPG"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-F5XDHSVTPG');
-</script>
-
-<link rel="manifest" href="manifest.json">
-
-
+  <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
 
+<!-- ===================== HEADER ===================== -->
+<header class="main-header" id="mainHeader">
+  <div class="header-inner">
+    <a href="/" class="logo">
 
- <!-- HEADER -->
-<header class="main-header">
-  <div class="left-section">
-    <a href="index.html" class="logo">
-      <span class="purple">D</span>erradj Shop
+      <span>Derradj <span class="logo-accent">Shop</span></span>
+
     </a>
 
-    <div class="explore-dropdown">
-      <a href="#" class="explore-link">Explore</a>
+    <nav class="main-nav">
+      <a href="#products"   class="nav-link">المنتجات</a>
+      <a href="#categories" class="nav-link">الأقسام</a>
+      <a href="about.html"  class="nav-link">من نحن</a>
+      <a href="faq.html"    class="nav-link">الأسئلة الشائعة</a>
+      <a href="contact.html" class="nav-link">تواصل معنا</a>
+    </nav>
 
-      <ul class="dropdown-menu">
-        <li><a href="/"> </a></li>
-
-      </ul>
+    <div style="display:flex;align-items:center;gap:10px;">
+      <a href="ordre/index.html" class="btn-header-cta">🛒 اطلب الآن</a>
+      <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="القائمة">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
-
-  <div class="search-box">
-    <input type="text" placeholder="ابحث عن كتاب أو مؤلف" id="searchInput" />
-    <ul class="suggestions" id="suggestionsList"></ul>
-  </div>
-
-  <nav class="right-links">
-    <a href="#client-feedback" class="nav-link">💬 آراء العملاء</a>
-    <a href="#why-us" class="nav-link">حول المتجر</a>
-
-    <!-- بدل تنزيل تطبيق منصة تعليم -->
-    <button id="orderBtn" class="install-btn">
-      🛒 اطلب الآن عبر الاستمارة
-    </button>
-
-    <a href="#how-to-order" class="nav-link">📝 طريقة الطلب</a>
-<a href="ordre/index.html" class="btn signup">الشراء من هنا</a>
-    <!-- بما أنك لا تريد تسجيل: احذفهم أو حولهم -->
-    <!-- <a href="login/login.html" class="btn login">Log in</a>
-    <a href="sign-up/sign-up.html" class="btn signup">Sign up</a> -->
-
-    <a href="#support" class="support-icon" title="الدعم الفني">💬</a>
-  </nav>
 </header>
 
-
-
- <!-- Categories Section -->
-<section class="categories-section">
-<h2 class="section-title">📚 Derradj Shop — متجر الكتب  في الجزائر</h2>
-
-
-
-
-
-
-
-
-
-
-
-
-<div class="categories-scroll-container"
-     style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; scrollbar-width: none; -ms-overflow-style: none;">
-  <div class="categories-scroll"
-       style="display: flex; flex-direction: row-reverse; justify-content: center; gap: 12px; min-width: max-content;">
-<!-- ...existing code... -->
-<button class="category highlight">📚 كتب مختارة بعناية وبأسعار مناسبة</button>
-<button class="category">🚚 توصيل لكل الولايات</button>
-<button class="category">💳 الدفع عند الاستلام</button>
-<button class="category">💬 دعم فوري 24/7</button>
-<button class="category">📦 تغليف محترم وحماية للكتاب</button>
-
-</div>
-</div>
-
-<script>
-window.addEventListener("load", () => {
-  const container = document.querySelector(".categories-scroll-container");
-  if (!container) return;
-
-  if (window.innerWidth <= 768) {
-    // ابدأ من أقصى اليمين
-    setTimeout(() => {
-      const maxScroll = container.scrollWidth - container.clientWidth;
-      container.scrollLeft = maxScroll;
-    }, 200);
-  }
-});
-</script>
-<style>
-.categories-scroll-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* 🔹 نفس التنسيق مع تكبير خفيف للخط */
-.category {
-  font-size: 1rem;   /* كان 0.96rem — زيدناه قليلاً فقط */
-  font-weight: 545;     /* نفس السماكة */
-  padding: 10px 16px;   /* بدون تغيير */
-}
-</style>
-
-
-
-
-
-
-
-
-
-
-
-  <div class="course-cards">
-
-<!-- ★ فن اللامبالاة -->
-<a href="books/the-subtle-art/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/art.jpg" alt="فن اللامبالاة" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">فن اللامبالاة</h3>
-      <p class="instructor">مارك مانسون</p>
-
-      <div class="rating">
-        <span class="rating-value">4.8</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(320 مراجعة)</span>
-      </div>
-
-      <div class="price">850 DA</div>
-    </div>
-  </div>
-</a>
-
-<!-- ★ الأب الغني الأب الفقير -->
-<a href="books/rich-dad-poor-dad/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/father.png" alt="فن اللامبالاة" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">الأب الغني الأب الفقير</h3>
-      <p class="instructor">روبرت كيوساكي</p>
-
-      <div class="rating">
-        <span class="rating-value">4.9</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(410 مراجعة)</span>
-      </div>
-
-      <div class="price">900 DA</div>
-    </div>
-  </div>
-</a>
-
-<!-- ★ العادات الذرية -->
-<a href="books/atomic-habits/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/habit.png" alt="العادات الذرية" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">العادات الذرية</h3>
-      <p class="instructor">جيمس كلير</p>
-
-      <div class="rating">
-        <span class="rating-value">4.9</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(380 مراجعة)</span>
-      </div>
-
-      <div class="price">1000 DA</div>
-    </div>
-  </div>
-</a>
-
-<!-- ★ قوة الآن -->
-<a href="books/the-power-of-now/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/now.png" alt="قوة الآن" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">قوة الآن</h3>
-      <p class="instructor">إيكهارت تول</p>
-
-      <div class="rating">
-        <span class="rating-value">4.7</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(260 مراجعة)</span>
-      </div>
-
-      <div class="price">900 DA</div>
-    </div>
-  </div>
-</a>
-
-
-<!-- ★ أنت قوة مذهلة -->
-<a href="books/you-are/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/power.png" alt="أنت قوة مذهلة" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">أنت قوة مذهلة</h3>
-      <p class="instructor">جين سينسيرو</p>
-
-      <div class="rating">
-        <span class="rating-value">4.7</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(250 مراجعة)</span>
-      </div>
-
-      <div class="price">900 DA</div>
-    </div>
-  </div>
-</a>
-
-<!-- ★ نظرية الفستق -->
-<a href="books/pistachio-theory/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/fus.png" alt="نظرية الفستق" class="course-img" />
-    <div class="course-content">
-      <h3 class="course-title">نظرية الفستق</h3>
-      <p class="instructor">فهد عامر الأحمدي</p>
-
-      <div class="rating">
-        <span class="rating-value">4.6</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(280 مراجعة)</span>
-      </div>
-
-      <div class="price">950 DA</div>
-    </div>
-  </div>
-</a>
-
-
-<!-- ★ مميز بالأصفر -->
-<a href="books/distinguished-in-yellow/index.html" style="text-decoration: none; color: inherit;">
-  <div class="course-card">
-    <img src="thumbnail/asfer.png" alt="مميز بالأصفر" class="course-img" />
-
-    <div class="course-content">
-      <h3 class="course-title">مميز بالأصفر</h3>
-      <p class="instructor">إتش. جاكسون براون الابن & روشيل بينينجتون</p>
-
-      <div class="rating">
-        <span class="rating-value">4.6</span>
-        <span class="stars">★ ★ ★ ★ ★</span>
-        <span class="reviews">(210 مراجعة)</span>
-      </div>
-
-      <div class="price">850 DA</div>
-    </div>
-  </div>
-</a>
-
-
-
-
-  </div>
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products">المنتجات</a>
+  <a href="#categories">الأقسام</a>
+  <a href="about.html">من نحن</a>
+  <a href="faq.html">الأسئلة الشائعة</a>
+  <a href="contact.html">تواصل معنا</a>
+  <a href="ordre/index.html" class="mobile-cta-link">🛒 اطلب الآن</a>
 </div>
 
 
-  </section>
 
-
-
-
-
- <!--
-<section id="bundle-section" class="special-bundles-section">
-  <h2>باقة المواد الخاصة</h2>
-
-  <div class="bundles-container">
-
-
-
-
-
-<div class="bundle-card">
-  <h3>باقة المواد العلمية المميزة</h3>
-
-  <ul class="bundle-courses" style="text-align: left; direction: ltr; padding-left: 0;">
-    <li>🎓 Math 3 – Analyse 3</li>
-    <li>🎓 Ondes et Vibrations</li>
-    <li>🎓 Electronique Fondamentale 1</li>
-    <li>🎓 Electrotechnique Fondamentale 1</li>
-    <li>🎓 Probabilité et Statistique</li>
-    <li>🎓 Informatique 3</li>
-  </ul>
-
-  <div class="bundle-price">
-    <span class="old-price">دج 7700</span>
-    <span class="new-price">3999 دج فقط</span>
-  </div>
-
-  <div class="bundle-discount">
-    وفر <strong>3700 دج (48%)</strong>
-  </div>
-
-  <p style="
-    margin: 0.6rem 0 0.8rem;
-    font-size: 0.95rem;
-    color: #92400e;
-    background: #fff7ed;
-    border-radius: 8px;
-    padding: 6px 10px;
-    font-weight: 600;
-    text-align: center;
-  ">
-    ⏰ عرض خاص بفترة الامتحانات — صالح إلى غاية نهاية شهر جانفي
-  </p>
-
-  <ul class="bundle-benefits">
-    <li>✔️ دروس فيديو لكل مادة</li>
-    <li>✔️ دعم مباشر من الأستاذ</li>
-    <li>✔️ بث مباشر عند الطلب</li>
-    <li>✔️ دخول لجميع الدروس والاختبارات</li>
-  </ul>
-
-  <div class="payment-options">
-    <h4 style="text-align:center;">
-      طرق الدفع
-      <span
-        style="font-size: 0.9em; color: #6b7280; font-weight: 500; margin-right: 6px; cursor: pointer;"
-        onmouseover="this.style.color='#4f46e5';"
-        onmouseout="this.style.color='#6b7280';">
-        (اضغط للمعاينة 👇)
-      </span>
-    </h4>
-
-    <div class="payment-methods">
-      <button class="pay-option" onclick="window.open('payment/4000BARIDI.pdf', '_blank')">
-        📱 بريدي موب
-      </button>
-      <button
-        class="pay-option"
-        onclick="window.open('http://pay.chargily.com/payment-links/01kdfnn2getfrkmk9qjp1v9rd1', '_blank')">
-        💳 البطاقة الذهبية
-      </button>
-      <button class="pay-option" onclick="window.open('payment/4000.pdf', '_blank')">
-        📮 بريد الجزائر
-      </button>
+<!-- ===================== BENEFITS BAR ===================== -->
+<section class="benefits-bar">
+  <div class="benefits-inner">
+    <div class="benefit-item">
+      <div class="benefit-icon">🎓</div>
+      <div class="benefit-text">
+        <strong>مثالي للطلاب الجامعيين</strong>
+        <span>هندسة كهربائية، إلكترونيك، تحكم آلي، أتمتة</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">💰</div>
+      <div class="benefit-text">
+        <strong>أسعار لا تُنافَس</strong>
+        <span>أقل بكثير من أسعار السوق الجزائري</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🚚</div>
+      <div class="benefit-text">
+        <strong>توصيل لكل الولايات</strong>
+        <span>جميع ولايات الجزائر الـ 58 — 15 يوم إلى شهر</span>
+      </div>
+    </div>
+    <div class="benefit-item">
+      <div class="benefit-icon">🛡️</div>
+      <div class="benefit-text">
+        <strong>ضمان على كل منتج</strong>
+        <span>استرجاع أو تعويض في حال وجود عيب</span>
+      </div>
     </div>
   </div>
+</section>
 
-  <a href="sign-up/sign-up.html" class="bundle-btn">
-    اشترك في الباقة الآن
-  </a>
-</div>
 
-    <div class="bundle-card">
-      <h3>باقة السنة الثالثة هندسة كهربائية</h3>
-      <ul class="bundle-courses" style="text-align: left; direction: ltr; padding-left: 0;">
-        <li>🎓 Systèmes Asservis</li>
-        <li>🎓 Réseaux Électrique</li>
-        <li>🎓 Électronique de Puissance</li>
-        <li>🎓 Théorie du Champ Électromagnétique</li>
-      </ul>
-      <div class="bundle-price">
-  <span class="old-price">دج 4700</span>
-  <span class="new-price">3500 دج فقط</span>
-</div>
-<div class="bundle-discount">وفر <strong>1200 دج (26%)</strong></div>
 
-      <ul class="bundle-benefits">
-        <li>✔️ دروس فيديو لكل مادة</li>
-        <li>✔️ دعم مباشر من الأستاذ</li>
-        <li>✔️ بث مباشر عند الطلب</li>
-        <li>✔️ دخول لجميع الدروس والاختبارات</li>
-      </ul>
-      <div class="payment-options">
-        <h4 style="text-align:center;">طرق الدفع
-          <span style="font-size: 0.9em; color: #6b7280; font-weight: 500; margin-right: 6px; cursor: pointer;"
-            onmouseover="this.style.color='#4f46e5';" onmouseout="this.style.color='#6b7280';">(اضغط للمعاينة 👇)</span>
-        </h4>
-        <div class="payment-methods">
-          <button class="pay-option" onclick="window.open('payment/3500.pdf', '_blank')">📱 بريدي موب</button>
-          <button class="pay-option"
-            onclick="window.open('http://pay.chargily.com/payment-links/01k8z8rzhjg9zmzv7369mr14v9', '_blank')">💳
-            البطاقة الذهبية</button>
-          <button class="pay-option" onclick="window.open('payment/3500CCP.pdf', '_blank')">📮 بريد الجزائر</button>
+<!-- ===================== PRODUCTS ===================== -->
+<section class="products-section section-wrap" id="products">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-label">الأكثر طلباً</div>
+      <h2 class="section-title">المنتجات الأكثر مبيعاً</h2>
+      <p class="section-subtitle">منتجات مختارة بعناية لطلاب الهندسة الكهربائية والإلكترونيك وعشاق Arduino — بأفضل الأسعار في الجزائر</p>
+    </div>
+
+    <div class="products-grid" style="grid-template-columns:1fr;max-width:520px;margin:0 auto 48px;">
+
+      <!-- المنتج الوحيد -->
+      <a href="products/electronics-components-starter-kit/index.html" class="product-card">
+        <div class="product-badge new">متوفر الآن</div>
+        <div class="product-img-area" style="height:240px;">
+<div class="product-img-area">
+  <img
+    src="products/electronics-components-starter-kit/pictures/main-4.jpg"
+    alt="Electronics Components Kit"
+    class="product-image"
+  />
+</div>        </div>
+        <div class="product-info">
+          <div class="product-cat-label">Electronics Components Kit — Arduino DIY</div>
+          <h3 class="product-name">Electronics Components Kit Project Starter Electronic DIY Kit With 830 Tie-points Breadboard For Arduino R3 With Box</h3>
+          <div class="product-rating">
+            <span class="product-stars">★★★★★</span>
+            <span class="product-rating-count">(تقييم ممتاز)</span>
+          </div>
+          <div class="product-prices">
+            <span class="price-current">7,000 DA</span>
+          </div>
+          <div class="product-tags">
+            <span class="product-tag">830 Breadboard</span>
+            <span class="product-tag">Potentiometer</span>
+            <span class="product-tag">Buzzer</span>
+            <span class="product-tag">LED Components</span>
+            <span class="product-tag">For Arduino R3</span>
+          </div>
+          <button class="btn-order-card">اطلب الآن — 7,000 DA</button>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="products-cta-row">
+      <a href="ordre/index.html" class="btn-primary">🛒 اطلب الآن — أسعار منافسة مضمونة</a>
+    </div>
+  </div>
+</section>
+<!-- ===================== CATEGORIES ===================== -->
+<section class="categories-section" id="categories">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">تصفح حسب القسم</h2>
+      <p class="section-subtitle">كل ما تحتاجه للطالب الجامعي، مشاريع Arduino، مشاريع التخرج، وعشاق DIY</p>
+    </div>
+    <div class="categories-grid">
+      <a href="#products" class="category-card active">
+        <div class="cat-icon">⚡</div>
+        <h3>أطقم Arduino</h3>
+        <p>أطقم كاملة للمبتدئين والمحترفين</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">🔌</div>
+        <h3>مكونات إلكترونية</h3>
+        <p>مقاومات، مكثفات، LEDs، ترانزستورات</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">🔗</div>
+        <h3>Breadboards & Jumpers</h3>
+        <p>لوحات تجارب وأسلاك توصيل ملونة</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">📡</div>
+        <h3>Sensors & Modules</h3>
+        <p>حساسات وموديولات لكل مشاريعك</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">📊</div>
+        <h3>أدوات القياس</h3>
+        <p>مقاييس متعددة، أوسيلوسكوب، أجهزة قياس</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">⚙️</div>
+        <h3>مكونات كهربائية</h3>
+        <p>محولات، ريليهات، محركات، أسلاك</p>
+      </a>
+      <a href="#products" class="category-card">
+        <div class="cat-icon">🔧</div>
+        <h3>أدوات DIY</h3>
+        <p>لحام، قواطع، أدوات احترافية للمشاريع</p>
+      </a>
+      <a href="#products" class="category-card offers">
+        <div class="cat-icon">🎓</div>
+        <h3>مشاريع التخرج</h3>
+        <p>باقات كاملة لمشاريع التخرج الجامعية</p>
+        <span class="badge-hot">🔥 للطلاب</span>
+      </a>
+    </div>
+  </div>
+</section>
+<!-- ===================== STUDENT BANNER ===================== -->
+<section class="marketing-banner">
+  <div class="banner-inner">
+    <div>
+      <div class="banner-eyebrow">🎓 خاص بالطلاب الجامعيين</div>
+      <h2>كل ما تحتاجه لمشروع تخرجك في مكان واحد</h2>
+      <p>سواء كنت في هندسة كهربائية، إلكترونيك، تحكم آلي، طاقات متجددة، كهروتقني أو أتمتة صناعية — Derradj Shop يوفر لك جميع المكونات والأدوات التي تحتاجها لإتمام تجاربك ومشاريعك بأسعار مناسبة جداً لميزانية الطالب.</p>
+      <div class="banner-checks">
+        <span>أطقم Arduino للمبتدئين والمحترفين</span>
+        <span>Sensors وموديولات متنوعة</span>
+        <span>أدوات قياس احترافية</span>
+        <span>ضمان على كل منتج</span>
+      </div>
+      <a href="ordre/index.html" class="btn-banner">🎓 اطلب لمشروعك الآن</a>
+    </div>
+    <div class="savings-card">
+      <div class="savings-label">وفّر حتى</div>
+      <div class="savings-number">50<span class="savings-unit">%</span></div>
+      <div class="savings-caption">مقارنة بأسعار السوق الجزائري</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section class="why-us section-wrap">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">لماذا تختار Derradj Shop؟</h2>
+      <p class="section-subtitle">متجر متخصص في الإلكترونيات يفهم احتياجاتك كطالب أو مهندس أو هاوٍ</p>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">💰</div>
+        <h3>أسعار مناسبة جداً</h3>
+        <p>أسعارنا أقل بكثير من السوق الجزائري. خصصنا أسعار مناسبة لميزانية الطالب الجامعي مع الحفاظ على أعلى معايير الجودة.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🎓</div>
+        <h3>مخصص لطلاب الجامعات</h3>
+        <p>نفهم متطلبات الطلاب في الهندسة الكهربائية، الإلكترونيك، التحكم الآلي، الطاقات المتجددة، والأتمتة الصناعية.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🛡️</div>
+        <h3>ضمان كامل على المنتجات</h3>
+        <p>كل منتج مضمون. في حال وجود عيب أو خلل، نسترجع المال أو نعوضك بمنتج بديل — شفافية تامة مع عملائنا.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">📦</div>
+        <h3>تغليف آمن ومحكم</h3>
+        <p>المكونات الإلكترونية تحتاج حماية خاصة أثناء الشحن. نغلف منتجاتنا بطريقة احترافية تضمن وصولها سليمة.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">💳</div>
+        <h3>دفع آمن بالبطاقة الذهبية</h3>
+        <p>الدفع مسبقاً عبر البطاقة الذهبية (CIB / Edahabia) بأمان تام. لا حاجة لتسليم النقود — كل شيء إلكتروني وموثوق.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🔧</div>
+        <h3>دعم تقني لمشاريعك</h3>
+        <p>فريقنا متاح لمساعدتك في اختيار المكونات المناسبة لمشروعك، سواء كان تجربة مخبرية أو مشروع تخرج أو مشروع DIY.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DELIVERY INFO ===================== -->
+<section class="delivery-section">
+  <div class="container">
+    <div class="delivery-grid">
+      <div class="delivery-info">
+        <h2>معلومات التوصيل والدفع</h2>
+
+        <div class="delivery-detail">
+          <div class="delivery-detail-icon">🕐</div>
+          <div>
+            <strong>مدة التوصيل</strong>
+            <p>من 15 يوم إلى شهر كامل — حسب ولايتك ومنطقتك في الجزائر</p>
+          </div>
+        </div>
+
+        <div class="delivery-detail">
+          <div class="delivery-detail-icon">📍</div>
+          <div>
+            <strong>التغطية الجغرافية</strong>
+            <p>جميع ولايات الجزائر الـ 58 — توصيل للمنزل أو مكتب البريد</p>
+          </div>
+        </div>
+
+        <div class="delivery-detail">
+          <div class="delivery-detail-icon">💳</div>
+          <div>
+            <strong>طريقة الدفع</strong>
+            <p>الدفع مسبقاً عبر البطاقة الذهبية (CIB / Edahabia) — آمن ومشفر 100%</p>
+          </div>
+        </div>
+
+        <div class="delivery-detail">
+          <div class="delivery-detail-icon">🛡️</div>
+          <div>
+            <strong>الضمان والاسترجاع</strong>
+            <p>في حال وجود عيب في المنتج يتم استرجاع المال أو تعويض العميل حسب الحالة</p>
+          </div>
+        </div>
+
+        <a href="delivery.html" class="btn-outline">اعرف أكثر عن سياسة التوصيل</a>
+      </div>
+
+      <div class="order-steps">
+        <h3>كيف تطلب منتجك؟</h3>
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-content">
+            <strong>اختر منتجك</strong>
+            <p>تصفح الأقسام واختر المكونات أو الطقم الذي تحتاجه لمشروعك</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-content">
+            <strong>اضغط "اطلب الآن"</strong>
+            <p>واملأ بيانات طلبك — اسم المنتج، الكمية، وعنوان التوصيل</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-content">
+            <strong>ادفع بالبطاقة الذهبية</strong>
+            <p>دفع مسبق آمن عبر CIB أو Edahabia — لا يتم الشحن إلا بعد تأكيد الدفع</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-content">
+            <strong>انتظر طلبك بين 15 يوم وشهر</strong>
+            <p>يصلك منتجك في حالة ممتازة مع ضمان كامل</p>
+          </div>
         </div>
       </div>
-      <a href="sign-up/sign-up.html" class="bundle-btn">اشترك في الباقة الآن</a>
     </div>
-
   </div>
 </section>
--->
 
-
-<div class="about-benefits-container">
-  <!-- 📝 طريقة الشراء – Derradj Shop -->
-  <section class="about-block" id="how-to-order" style="direction: rtl; text-align: right;">
-    <h2 class="section-heading" style="text-align: center;">
-      <span>طريقة الشراء</span>
-    </h2>
-
-    <div class="about-content">
-
-      <p>
-        في <strong>Derradj Shop</strong> نوفّر تجربة شراء
-        <strong>بسيطة، آمنة، وواضحة</strong>، مصممة لتناسب مختلف المنتجات
-        الحالية والمستقبلية.
-      </p>
-
-      <p>
-        لا تحتاج إلى إنشاء حساب أو الدفع المسبق،
-        فقط اختر المنتج المناسب لك واتبع خطوات الطلب بسهولة.
-      </p>
-
-      <p>
-        حرصًا على ثقة زبائننا، نعتمد
-        <strong>الدفع عند الاستلام</strong>،
-        حيث يتم الدفع فقط بعد وصول الطلبية والتأكد من سلامتها ومطابقتها.
-      </p>
-
-      <ul class="about-list">
-        <li>🛒 اختر المنتج الذي ترغب في شرائه من الموقع</li>
-        <li>📝 اضغط على زر <strong>اطلب الآن</strong> واملأ استمارة الطلب</li>
-        <li>📞 سيتم التواصل معك لتأكيد الطلب والمعلومات</li>
-        <li>📦 تجهيز الطلبية والتنسيق مع البائع أو المزوّد</li>
-        <li>🚚 توصيل الطلبية إلى عنوانك خلال 24–72 ساعة</li>
-        <li>💳 الدفع عند الاستلام بعد التأكد من الطلب</li>
-      </ul>
-
-      <p>
-        بهذه الطريقة نضمن لكم تجربة شراء
-        <strong>مريحة، شفافة، وخالية من أي مخاطرة</strong>،
-        سواء تعلق الأمر بمنتجات حالية أو مستقبلية.
-      </p>
-
+<!-- ===================== REVIEWS ===================== -->
+<section class="reviews-section section-wrap" id="reviews">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">ماذا قال عملاؤنا؟</h2>
+      <p class="section-subtitle">آراء حقيقية من طلاب وهواة ومهندسين من مختلف ولايات الجزائر</p>
     </div>
-  </section>
-</div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"طلبت طقم Arduino UNO R3 لمشروع تخرجي في الهندسة الكهربائية. وصل في 3 أسابيع وكل المكونات سليمة. السعر مش لقيته أرخص في الجزائر. شكراً Derradj Shop!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">أ.ب</div>
+          <div class="reviewer-info">
+            <strong>أمين ب. — طالب هندسة كهربائية</strong>
+            <span>جامعة باتنة</span>
+          </div>
+        </div>
+      </div>
 
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"طلبت حزمة Sensors لمشروع التحكم الآلي. كل الحساسات تشتغل بشكل ممتاز. التغليف كان محترف جداً والمنتجات وصلت بدون أي ضرر. أنصح بيه كل الطلاب!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">س.م</div>
+          <div class="reviewer-info">
+            <strong>سارة م. — طالبة إلكترونيك</strong>
+            <span>جامعة وهران</span>
+          </div>
+        </div>
+      </div>
 
-<div class="about-benefits-container">
-  <!-- 🧾 من نحن – Derradj Shop -->
-  <section class="about-block" id="why-us" style="direction: rtl; text-align: right;">
-    <h2 class="section-heading" style="text-align: center;">
-      <span>Derradj Shop</span>
-    </h2>
-
-    <div class="about-content">
-   <p>
-<strong>Derradj Shop</strong> منصة وسيطة مستقلة تهدف إلى تسهيل الشراء عبر الإنترنت
-من خلال ربط الزبائن بالبائعين المعتمدين، في إطار من
-<strong>الشفافية، المصداقية، وحماية الحقوق</strong>.
-</p>
-
-<p>
-نحن لا نبيع المنتجات بشكل مباشر، بل نعمل كحلقة وصل موثوقة
-تنظم الطلبات وتتابعها من لحظة الإرسال إلى غاية التسليم.
-</p>
-
-<p>
-حرصًا على ثقة زبائننا، نعتمد
-<strong>الدفع عند الاستلام</strong>،
-حيث يتم الدفع فقط بعد وصول الطلبية والتأكد من سلامتها ومطابقتها.
-</p>
-
-
-      <ul class="about-list">
-        <li>🛡️ منصة وسيطة تضمن حقوق الزبون والبائع</li>
-        <li>📦 الدفع عند الاستلام بعد التأكد من الطلبية</li>
-        <li>🔒 حماية كاملة لبيانات الزبائن وعدم استخدامها خارج إطار الطلب</li>
-        <li>💰 أسعار واضحة وتكاليف توصيل معلنة دون رسوم خفية</li>
-        <li>📞 متابعة الطلب والتنسيق مع البائع حتى التسليم</li>
-        <li>🤝 شراكات مع بائعين موثوقين ومعتمدين</li>
-      </ul>
-
-      <p>
-        إن اختياركم لـ <strong>Derradj Shop</strong> هو اختيار للأمان، الوضوح،
-        وتجربة شراء مبنية على الثقة والالتزام.
-      </p>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"اشتريت المقياس المتعدد الرقمي وطقم مكونات إلكترونية. الجودة فاقت توقعاتي والأسعار أرخص من أي دكان في قسنطينة. متجر موثوق وأنا هنشري منو دائماً!"</p>
+        <div class="reviewer">
+          <div class="reviewer-avatar">ك.ر</div>
+          <div class="reviewer-info">
+            <strong>كريم ر. — هاوي إلكترونيات</strong>
+            <span>قسنطينة</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </section>
-</div>
-
-
-
-</div>
-
-
-
-<section class="contact-form" id="support">
-  <h2>هل لديك سؤال؟</h2>
-  <form id="questionForm">
-    <input type="text" name="name" id="name" placeholder="الاسم الكامل" required />
-<input
-  type="tel"
-  name="contact"
-  id="contact"
-  placeholder="أدخل رقم الهاتف"
-  required
-  dir="rtl"
-  style="text-align: right;"
-  maxlength="14"
-  oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-/>
-    <textarea name="message" id="message" rows="5" placeholder="اكتب رسالتك هنا..." required></textarea>
-    <button type="submit">إرسال</button>
-    <p id="support-message" style="margin-top:1rem; color:green;"></p>
-  </form>
+  </div>
 </section>
 
+<!-- ===================== CONTACT SECTION ===================== -->
+<section class="contact-section" id="support">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h2>تواصل معنا</h2>
+        <p>هل لديك سؤال حول مكون معين؟ تحتاج مساعدة في اختيار مكونات مشروعك؟ فريقنا متاح دائماً لمساعدتك.</p>
 
-<section class="student-comments-modern" id="client-feedback">
-<h2 class="comments-title"> ماذا يقول زبائننا عن تجربتهم معنا ؟</h2>
-  <div id="modern-comments-container" class="comments-grid"></div>
+        <div class="contact-item">
+          <span class="contact-item-icon">📞</span>
+          <a href="tel:+213555491316">0555 49 13 16</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">📧</span>
+          <a href="mailto:derradjshop@gmail.com">derradjshop@gmail.com</a>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">📍</span>
+          <span>الجزائر العاصمة، الجزائر</span>
+        </div>
+        <div class="contact-item">
+          <span class="contact-item-icon">🕐</span>
+          <span>متاح على مدار الأسبوع</span>
+        </div>
+      </div>
+
+      <div class="contact-form-card">
+        <h3>أرسل لنا رسالة</h3>
+        <form id="contactForm">
+          <div class="form-group">
+            <label for="name">الاسم الكامل</label>
+            <input type="text" id="name" name="name" placeholder="أدخل اسمك الكامل" required>
+          </div>
+          <div class="form-group">
+            <label for="contact">رقم الهاتف</label>
+            <input type="tel" id="contact" name="contact" placeholder="0555xxxxxx" required
+                   dir="ltr" inputmode="numeric" maxlength="10"
+                   oninput="this.value=this.value.replace(/\D/g,'')">
+          </div>
+          <div class="form-group">
+            <label for="message">رسالتك</label>
+            <textarea id="message" name="message" rows="4" placeholder="اكتب سؤالك أو استفساراتك هنا... (مثال: ما هي المكونات المناسبة لمشروع Arduino؟)" required></textarea>
+          </div>
+          <button type="submit" class="form-submit">إرسال الرسالة</button>
+          <p id="contactStatus" class="status-msg"></p>
+        </form>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- ===================== FOOTER ===================== -->
+<footer class="main-footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="/" class="footer-logo">
 
-
-<footer class="main-footer" dir="rtl">
-  <div class="footer-content">
-    <!-- عن المنصة -->
-    <div class="footer-section about">
-      <h3>عن المنصة</h3>
-      <p>منصة جزائرية تعليمية موجهة لطلبة الجامعات، تقدم دورات مبسطة، ملفات PDF، وفيديوهات مباشرة مع أساتذة مؤهلين.</p>
+        <span>Derradj <span class="logo-accent">Shop</span></span>
+      </a>
+      <p>متجر جزائري متخصص في بيع أطقم Arduino، المكونات الإلكترونية والكهربائية، Breadboards، Sensors، أدوات القياس، ومستلزمات مشاريع DIY والتخرج الجامعي.</p>
+      <div class="footer-contact-list">
+        <a href="tel:+213555491316">📞 0555 49 13 16</a>
+        <a href="mailto:derradjshop@gmail.com">📧 derradjshop@gmail.com</a>
+        <span>📍 الجزائر العاصمة، الجزائر</span>
+      </div>
     </div>
 
-<!-- روابط سريعة -->
-<div class="footer-section links">
-  <h3>روابط سريعة</h3>
-  <ul>
-    <li>
-      <a href="/">الرئيسية</a>
-    </li>
-    </li>
+    <div class="footer-links-col">
+      <h4>المنتجات</h4>
+      <ul>
+        <li><a href="products/electronics-components-starter-kit/index.html">Electronics Components Kit — Arduino Starter DIY</a></li>
+      </ul>
+    </div>
 
-    <li>
-<a href="#how-to-order">طريقة الشراء</a>
-    </li>
+    <div class="footer-links-col">
+      <h4>المتجر</h4>
+      <ul>
+        <li><a href="about.html">من نحن</a></li>
+        <li><a href="delivery.html">سياسة التوصيل</a></li>
+        <li><a href="payment.html">الدفع والضمان</a></li>
+        <li><a href="faq.html">الأسئلة الشائعة</a></li>
+        <li><a href="contact.html">تواصل معنا</a></li>
+        <li><a href="terms.html">الشروط والأحكام</a></li>
+      </ul>
+    </div>
 
-    <li>
-      <a href="terms.html" target="_blank" rel="noopener noreferrer">الشروط والأحكام</a>
-    </li>
-  </ul>
-</div>
-
-
-    <!-- تواصل معنا -->
-    <div class="footer-section contact">
-      <h3>تواصل معنا</h3>
-        <p><strong>📞</strong> <a href="tel:+213555491316" dir="ltr">0555 49 13 16</a></p>
-
-      <p><strong>📧</strong> <a href="mailto:derradjshop@gmail.com">derradjshop@gmail.com
-</a></p>
-      <p><strong>📍</strong> الجزائر، الجزائر العاصمة</p>
+    <div class="footer-links-col">
+      <h4>الدعم</h4>
+      <ul>
+        <li><a href="ordre/index.html">اطلب الآن</a></li>
+        <li><a href="faq.html">كيف أطلب؟</a></li>
+        <li><a href="contact.html">الدعم الفني</a></li>
+      </ul>
+      <div style="margin-top:20px;">
+        <h4>طريقة الدفع</h4>
+        <div class="footer-pay-badge">💳 البطاقة الذهبية (CIB)</div>
+        <div class="footer-pay-badge" style="margin-top:8px;">💳 Edahabia / Baridimob</div>
+      </div>
     </div>
   </div>
 
   <div class="footer-bottom">
-    <p>جميع الحقوق محفوظة &copy; 2025 - Derradj Academy</p>
+    <p>© 2025 Derradj Shop — جميع الحقوق محفوظة | متجر Arduino والمكونات الإلكترونية في الجزائر</p>
   </div>
 </footer>
 
-
-
-
-
-
-
+<!-- ===================== SCRIPTS ===================== -->
 <script type="module">
   import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -647,201 +518,60 @@ window.addEventListener("load", () => {
     "https://jbmcbjzcedqpvnhbmrhk.supabase.co",
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpibWNianpjZWRxcHZuaGJtcmhrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk2NjU1MDUsImV4cCI6MjA4NTI0MTUwNX0.u_D1K7gFCQmmI_m0do5-VpdXrXXLPQ8BCDMLc3Ew1Yk"
   );
-const form = document.getElementById("questionForm");
-const statusMsg = document.getElementById("support-message");
 
-form.addEventListener("submit", async (e) => {
-  e.preventDefault();
+  const form = document.getElementById("contactForm");
+  const statusMsg = document.getElementById("contactStatus");
 
-  statusMsg.style.color = "gray";
-  statusMsg.textContent = "⏳ جاري الإرسال...";
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    statusMsg.style.color = "gray";
+    statusMsg.textContent = "⏳ جاري الإرسال...";
 
-  const name = document.getElementById("name").value.trim();
-  const contact = document.getElementById("contact").value.trim();
-  const message = document.getElementById("message").value.trim();
+    const name    = document.getElementById("name").value.trim();
+    const contact = document.getElementById("contact").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-  if (!name || !contact || !message) {
-    statusMsg.style.color = "red";
-    statusMsg.textContent = "❌ يرجى ملء جميع الحقول.";
-    return;
-  }
+    if (!name || !contact || !message) {
+      statusMsg.style.color = "red";
+      statusMsg.textContent = "❌ يرجى ملء جميع الحقول.";
+      return;
+    }
 
-  const { error } = await supabase
-    .from("message")   // ✅ اسم الجدول
-    .insert([
-      { name, contact, message }
-    ]);
-
-  if (error) {
-    console.error(error);
-    statusMsg.style.color = "red";
-    statusMsg.textContent = "❌ فشل إرسال الرسالة، حاول لاحقًا.";
-    return;
-  }
-
-  statusMsg.style.color = "green";
-  statusMsg.textContent = "✅ تم إرسال رسالتك بنجاح، سنرد عليك قريبًا.";
-
-  form.reset();
-});
-
-  // ✅ تعقيم النص لتفادي مشاكل innerHTML و XSS
-  function escapeHTML(str = "") {
-    return String(str)
-      .replaceAll("&", "&amp;")
-      .replaceAll("<", "&lt;")
-      .replaceAll(">", "&gt;")
-      .replaceAll('"', "&quot;")
-      .replaceAll("'", "&#039;");
-  }
-
-function formatDate(created_at) {
-  if (!created_at) return null;
-
-  const d = new Date(created_at);
-  if (Number.isNaN(d.getTime())) return null;
-
-  const months = [
-    "جانفي", "فيفري", "مارس", "أفريل", "ماي", "جوان",
-    "جويلية", "أوت", "سبتمبر", "أكتوبر", "نوفمبر", "ديسمبر"
-  ];
-
-  return {
-    day: String(d.getDate()),
-    month: months[d.getMonth()],
-    year: String(d.getFullYear())
-  };
-}
-
-  async function fetchModernComments() {
-    const container = document.getElementById("modern-comments-container");
-    if (!container) return;
-
-    // حالة تحميل
-    container.innerHTML = `<p style="color:#6b7280;">⏳ جاري تحميل التعليقات...</p>`;
-
-    const { data, error } = await supabase
-      .from("course_comments")
-      .select("comment, full_name, module, created_at")
-      .eq("is_public", true)
-      .not("comment", "is", null)
-      .neq("comment", "")
-      .order("created_at", { ascending: false })
-      .limit(24); // ✅ عدّل العدد كما تحب
+    const { error } = await supabase.from("message").insert([{ name, contact, message }]);
 
     if (error) {
-      console.error("Supabase error:", error);
-      container.innerHTML = `<p style="color:#ef4444;">⚠️ تعذر تحميل التعليقات.</p>`;
+      statusMsg.style.color = "red";
+      statusMsg.textContent = "❌ فشل الإرسال، حاول لاحقاً.";
       return;
     }
 
-    if (!data || data.length === 0) {
-      container.innerHTML = `<p style="color:#6b7280;">لا توجد تعليقات بعد.</p>`;
-      return;
-    }
-
-    container.innerHTML = "";
-
-    data.forEach((row) => {
-      const commentRaw = row?.comment ?? "";
-      const fullNameRaw = row?.full_name ?? "مستخدم";
-      const moduleRaw = row?.module ?? "";
-
-      const comment = escapeHTML(commentRaw);
-      const full_name = escapeHTML(fullNameRaw);
-      const moduleFormatted = escapeHTML(moduleRaw.replace(/_/g, " "));
-
-      const initial = (fullNameRaw?.trim()?.charAt(0) || "?").toUpperCase();
-
-      const shortComment =
-        commentRaw.length > 140
-          ? escapeHTML(commentRaw.slice(0, 140)) + "..."
-          : comment;
-
-      const isArabic = /[\u0600-\u06FF]/.test(commentRaw);
-      const direction = isArabic ? "rtl" : "ltr";
-
-      const dateParts = formatDate(row?.created_at);
-
-
-      const card = document.createElement("div");
-      card.className = "comment-card-modern";
-
-      card.innerHTML = `
-        <div class="comment-header">
-          <div class="comment-avatar">${escapeHTML(initial)}</div>
-
-          <div style="display:flex; flex-direction:column; gap:4px; min-width:0;">
-            <div class="comment-name" title="${full_name}">
-              ${full_name}
-              <span style="color:#6b7280; font-weight:600;">(${moduleFormatted || "عام"})</span>
-            </div>
-
-${dateParts ? `
-  <div class="comment-time" dir="rtl">
-    <span class="date-num" dir="ltr">${escapeHTML(dateParts.day)}</span>
-    <span class="date-month">${escapeHTML(dateParts.month)}</span>
-    <span class="date-num" dir="ltr">${escapeHTML(dateParts.year)}</span>
-  </div>
-` : ""}
-          </div>
-        </div>
-
-        <div class="comment-body" dir="${direction}">${shortComment}</div>
-      `;
-
-      container.appendChild(card);
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", fetchModernComments);
+    statusMsg.style.color = "green";
+    statusMsg.textContent = "✅ تم إرسال رسالتك بنجاح، سنرد عليك قريباً.";
+    form.reset();
+  });
 </script>
 
 <script>
-  // ✅ زر تثبيت PWA (بدون أخطاء لو الزر غير موجود)
-  let deferredPrompt;
-  const installBtn = document.querySelector(".install-btn");
+  const menuBtn    = document.getElementById('mobileMenuBtn');
+  const mobileMenu = document.getElementById('mobileMenu');
+  const header     = document.getElementById('mainHeader');
 
-  window.addEventListener("beforeinstallprompt", (e) => {
-    e.preventDefault();
-    deferredPrompt = e;
-    if (installBtn) installBtn.style.display = "block";
+  menuBtn?.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+    menuBtn.classList.toggle('open');
   });
 
-  if (installBtn) {
-    installBtn.addEventListener("click", async () => {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      console.log("📌 اختيار المستخدم:", outcome);
-      deferredPrompt = null;
-      installBtn.style.display = "none";
+  document.querySelectorAll('.mobile-menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+      menuBtn.classList.remove('open');
     });
-  }
+  });
+
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 50);
+  }, { passive: true });
 </script>
-
-<script>
-  // ⚠️ هذا يمسح Service Worker + Cache (استعمله فقط أثناء التطوير)
-  // ✅ يمنع التكرار كل مرة بزيارة الصفحة
-  if ("serviceWorker" in navigator) {
-    const alreadyCleared = localStorage.getItem("sw_cache_cleared_v1");
-    if (!alreadyCleared) {
-      navigator.serviceWorker.getRegistrations().then((regs) => {
-        regs.forEach((reg) => reg.unregister());
-      });
-
-      if (window.caches && caches.keys) {
-        caches.keys().then((names) => names.forEach((n) => caches.delete(n)));
-      }
-
-      localStorage.setItem("sw_cache_cleared_v1", "1");
-      console.log("🧹 SW & Cache cleared (dev only).");
-    }
-  }
-</script>
-
-
-
 
 </body>
 </html>

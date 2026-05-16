@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const { data: staffRow, error: staffErr } = await supabase
         .from("staff_accounts")
         .select("role, is_active")
-        .eq("user_id", userId)
+        .eq("id", userId)
         .maybeSingle();
 
       if (staffErr) {

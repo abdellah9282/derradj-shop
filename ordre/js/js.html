@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>توقّف الآن — أنت أقوى من هذه اللحظة</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Tajawal:wght@300;400;500;700;900&family=Reem+Kufi:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-1:#0b1014;
+    --bg-2:#121922;
+    --bg-3:#1a232e;
+    --ink:#e8e6df;
+    --ink-soft:#b8b3a7;
+    --ink-dim:#7e7a72;
+    --gold:#c9a96a;
+    --gold-soft:#8a7a52;
+    --accent:#3d6b6b;
+    --accent-soft:#2a4a4a;
+    --danger:#a85c50;
+    --line:rgba(201,169,106,.18);
+    --line-soft:rgba(232,230,223,.08);
+    --shadow:0 30px 60px -20px rgba(0,0,0,.6),0 18px 36px -18px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+
+  body{
+    font-family:'Tajawal',system-ui,sans-serif;
+    background:var(--bg-1);
+    color:var(--ink);
+    line-height:1.85;
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* خلفية متدرجة هادئة + نسيج */
+  body::before{
+    content:"";
+    position:fixed;inset:0;
+    background:
+      radial-gradient(ellipse at 20% 10%, rgba(61,107,107,.15), transparent 50%),
+      radial-gradient(ellipse at 80% 90%, rgba(201,169,106,.08), transparent 50%),
+      linear-gradient(180deg,#0b1014 0%, #121922 50%, #0b1014 100%);
+    z-index:-2;
+  }
+  body::after{
+    content:"";
+    position:fixed;inset:0;
+    background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.9 0 0 0 0 0.85 0 0 0 0 0.7 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.4;
+    pointer-events:none;
+    z-index:-1;
+  }
+
+  .container{
+    max-width:880px;
+    margin:0 auto;
+    padding:60px 24px 80px;
+  }
+
+  /* ===== الترويسة ===== */
+  .hero{
+    text-align:center;
+    padding:40px 0 60px;
+    position:relative;
+    animation:fadeUp 1.2s ease-out;
+  }
+
+  .hero-ornament{
+    font-family:'Amiri',serif;
+    color:var(--gold);
+    font-size:32px;
+    opacity:.6;
+    margin-bottom:24px;
+    letter-spacing:8px;
+  }
+
+  .hero h1{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    font-size:clamp(32px,6vw,56px);
+    font-weight:700;
+    line-height:1.3;
+    color:var(--ink);
+    margin-bottom:16px;
+    letter-spacing:-.5px;
+  }
+  .hero h1 .highlight{
+    color:var(--gold);
+    display:block;
+    font-size:.7em;
+    margin-top:12px;
+    font-weight:500;
+  }
+
+  .hero-sub{
+    color:var(--ink-soft);
+    font-size:18px;
+    max-width:560px;
+    margin:24px auto 0;
+    font-weight:300;
+  }
+
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    margin:50px auto;
+    max-width:300px;
+    color:var(--gold);
+    opacity:.5;
+  }
+  .divider::before,.divider::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  }
+  .divider span{padding:0 16px;font-size:20px}
+
+  /* ===== البطاقات ===== */
+  .card{
+    background:linear-gradient(180deg,var(--bg-2) 0%, var(--bg-3) 100%);
+    border:1px solid var(--line-soft);
+    border-radius:16px;
+    padding:36px 32px;
+    margin-bottom:28px;
+    box-shadow:var(--shadow);
+    position:relative;
+    overflow:hidden;
+    transition:transform .4s ease, border-color .4s ease;
+  }
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;right:0;
+    width:120px;height:120px;
+    background:radial-gradient(circle at top right, rgba(201,169,106,.08), transparent 70%);
+    pointer-events:none;
+  }
+  .card:hover{
+    border-color:var(--line);
+    transform:translateY(-2px);
+  }
+
+  .card-label{
+    display:inline-block;
+    font-size:12px;
+    letter-spacing:4px;
+    color:var(--gold-soft);
+    text-transform:uppercase;
+    margin-bottom:12px;
+    font-weight:500;
+  }
+
+  .card h2{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    font-size:clamp(22px,3.5vw,30px);
+    font-weight:600;
+    color:var(--ink);
+    margin-bottom:20px;
+    line-height:1.4;
+    position:relative;
+    padding-right:20px;
+  }
+  .card h2::before{
+    content:"";
+    position:absolute;
+    right:0;top:50%;
+    transform:translateY(-50%);
+    width:4px;height:70%;
+    background:var(--gold);
+    border-radius:2px;
+  }
+
+  .card p{
+    color:var(--ink-soft);
+    font-size:17px;
+    margin-bottom:14px;
+    font-weight:300;
+  }
+
+  .card p strong{color:var(--ink);font-weight:500}
+
+  /* ===== قوائم العناصر ===== */
+  .item-list{
+    list-style:none;
+    margin-top:20px;
+  }
+  .item-list li{
+    padding:14px 18px 14px 14px;
+    margin-bottom:10px;
+    background:rgba(0,0,0,.2);
+    border-right:3px solid var(--accent);
+    border-radius:8px;
+    color:var(--ink);
+    font-size:16px;
+    font-weight:400;
+    transition:all .3s ease;
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+  }
+  .item-list li:hover{
+    border-right-color:var(--gold);
+    background:rgba(201,169,106,.05);
+    transform:translateX(-4px);
+  }
+  .item-list li .num{
+    color:var(--gold);
+    font-weight:700;
+    font-size:14px;
+    min-width:24px;
+    margin-top:4px;
+  }
+
+  /* قائمة الآثار السلبية */
+  .danger-list li{
+    border-right-color:var(--danger);
+  }
+  .danger-list li:hover{
+    border-right-color:#c47065;
+    background:rgba(168,92,80,.06);
+  }
+  .danger-list li .num{color:var(--danger)}
+
+  /* قائمة الفوائد */
+  .benefit-list li{
+    border-right-color:#5a8a5a;
+    background:rgba(90,138,90,.05);
+  }
+  .benefit-list li:hover{
+    border-right-color:#7aaa7a;
+    background:rgba(90,138,90,.1);
+  }
+  .benefit-list li .num{color:#7aaa7a}
+
+  /* ===== قسم الآية ===== */
+  .quran-card{
+    background:linear-gradient(135deg, rgba(61,107,107,.15), rgba(201,169,106,.08));
+    border:1px solid rgba(201,169,106,.25);
+    text-align:center;
+    padding:40px 28px;
+  }
+  .quran-card::before{
+    content:"﴿";
+    position:absolute;
+    top:-10px;right:20px;
+    font-family:'Amiri',serif;
+    font-size:80px;
+    color:var(--gold);
+    opacity:.15;
+  }
+  .quran-card::after{
+    content:"﴾";
+    position:absolute;
+    bottom:-30px;left:20px;
+    font-family:'Amiri',serif;
+    font-size:80px;
+    color:var(--gold);
+    opacity:.15;
+  }
+  .verse{
+    font-family:'Amiri',serif;
+    font-size:clamp(22px,4vw,30px);
+    color:var(--ink);
+    line-height:2;
+    margin:24px 0;
+    font-weight:700;
+  }
+  .verse-source{
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:2px;
+  }
+
+  /* ===== العبارات القوية ===== */
+  .truth-list{
+    list-style:none;
+    margin-top:20px;
+  }
+  .truth-list li{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    padding:20px 24px;
+    margin-bottom:12px;
+    background:linear-gradient(90deg, rgba(201,169,106,.08), transparent);
+    border-right:2px solid var(--gold);
+    font-size:18px;
+    font-weight:500;
+    color:var(--ink);
+    border-radius:6px;
+    position:relative;
+  }
+  .truth-list li::before{
+    content:"﹡";
+    color:var(--gold);
+    margin-left:12px;
+    font-size:20px;
+  }
+
+  /* ===== الزر الرئيسي ===== */
+  .action-section{
+    text-align:center;
+    margin:60px 0;
+    padding:50px 30px;
+    background:radial-gradient(ellipse at center, rgba(201,169,106,.12), transparent 70%);
+    border-radius:20px;
+  }
+
+  .big-button{
+    background:linear-gradient(180deg,var(--gold) 0%, var(--gold-soft) 100%);
+    color:#1a1410;
+    border:none;
+    padding:24px 48px;
+    font-size:22px;
+    font-weight:700;
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    border-radius:14px;
+    cursor:pointer;
+    box-shadow:0 20px 40px -10px rgba(201,169,106,.4), 0 0 0 1px rgba(201,169,106,.3);
+    transition:all .3s ease;
+    letter-spacing:1px;
+    position:relative;
+    overflow:hidden;
+  }
+  .big-button::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg,#e0c08a, var(--gold));
+    opacity:0;
+    transition:opacity .3s ease;
+    z-index:-1;
+  }
+  .big-button:hover{
+    transform:translateY(-3px);
+    box-shadow:0 25px 50px -10px rgba(201,169,106,.5), 0 0 0 1px rgba(201,169,106,.5);
+  }
+  .big-button:hover::before{opacity:1}
+  .big-button:active{transform:translateY(0)}
+
+  .success-message{
+    margin-top:30px;
+    padding:24px;
+    background:rgba(90,138,90,.1);
+    border:1px solid rgba(122,170,122,.3);
+    border-radius:12px;
+    color:#a8d0a8;
+    font-size:18px;
+    font-weight:500;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all .5s ease;
+    pointer-events:none;
+  }
+  .success-message.show{
+    opacity:1;
+    transform:translateY(0);
+  }
+  .success-message .ts{
+    display:block;
+    margin-top:8px;
+    color:var(--ink-dim);
+    font-size:13px;
+    font-weight:400;
+  }
+
+  /* ===== العدّاد ===== */
+  .counter-card{
+    background:linear-gradient(135deg, var(--bg-3), var(--bg-2));
+    text-align:center;
+    border:1px solid var(--line);
+  }
+
+  .counter-title{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    color:var(--gold);
+    font-size:18px;
+    margin-bottom:24px;
+    letter-spacing:2px;
+  }
+
+  .counter-display{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+    margin:24px 0;
+  }
+  .counter-unit{
+    background:rgba(0,0,0,.3);
+    border:1px solid var(--line-soft);
+    border-radius:12px;
+    padding:18px 8px;
+    transition:all .3s ease;
+  }
+  .counter-unit:hover{
+    border-color:var(--line);
+    background:rgba(201,169,106,.04);
+  }
+  .counter-num{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    font-size:clamp(28px,5vw,42px);
+    font-weight:700;
+    color:var(--ink);
+    line-height:1;
+    margin-bottom:6px;
+    font-variant-numeric:tabular-nums;
+  }
+  .counter-label{
+    font-size:12px;
+    color:var(--ink-dim);
+    letter-spacing:1px;
+  }
+
+  .reset-button{
+    background:transparent;
+    color:var(--ink-soft);
+    border:1px solid var(--line);
+    padding:14px 28px;
+    border-radius:10px;
+    font-family:'Tajawal',sans-serif;
+    font-size:15px;
+    font-weight:500;
+    cursor:pointer;
+    margin-top:20px;
+    transition:all .3s ease;
+  }
+  .reset-button:hover{
+    border-color:var(--gold);
+    color:var(--gold);
+    background:rgba(201,169,106,.05);
+  }
+
+  .since-text{
+    color:var(--ink-dim);
+    font-size:13px;
+    margin-top:14px;
+  }
+
+  /* ===== الرسالة الختامية ===== */
+  .closing{
+    margin-top:60px;
+    padding:40px 32px;
+    background:linear-gradient(180deg, rgba(61,107,107,.1), rgba(201,169,106,.05));
+    border:1px solid rgba(201,169,106,.2);
+    border-radius:16px;
+    text-align:center;
+    position:relative;
+  }
+  .closing-icon{
+    font-family:'Amiri',serif;
+    color:var(--gold);
+    font-size:40px;
+    margin-bottom:16px;
+    opacity:.7;
+  }
+  .closing p{
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    font-size:clamp(17px,2.5vw,21px);
+    color:var(--ink);
+    line-height:1.9;
+    font-weight:400;
+  }
+  .closing .signature{
+    margin-top:24px;
+    color:var(--gold);
+    font-family:'Amiri',serif;
+    font-size:16px;
+    letter-spacing:2px;
+  }
+
+  /* ===== أنيميشن ===== */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  @keyframes pulse{
+    0%,100%{box-shadow:0 20px 40px -10px rgba(201,169,106,.4), 0 0 0 1px rgba(201,169,106,.3), 0 0 0 0 rgba(201,169,106,.4)}
+    50%{box-shadow:0 20px 40px -10px rgba(201,169,106,.4), 0 0 0 1px rgba(201,169,106,.3), 0 0 0 12px rgba(201,169,106,0)}
+  }
+  .big-button{animation:pulse 2.5s infinite}
+
+  .card{
+    opacity:0;
+    transform:translateY(30px);
+    animation:fadeUp .8s ease-out forwards;
+  }
+  .card:nth-child(1){animation-delay:.1s}
+  .card:nth-child(2){animation-delay:.2s}
+  .card:nth-child(3){animation-delay:.3s}
+  .card:nth-child(4){animation-delay:.4s}
+  .card:nth-child(5){animation-delay:.5s}
+  .card:nth-child(6){animation-delay:.6s}
+
+  /* ===== الهاتف ===== */
+  @media (max-width:600px){
+    .container{padding:30px 16px 60px}
+    .card{padding:28px 22px}
+    .quran-card{padding:32px 20px}
+    .action-section{padding:36px 18px;margin:40px 0}
+    .big-button{padding:20px 32px;font-size:18px;width:100%}
+    .counter-display{gap:8px}
+    .counter-unit{padding:14px 4px}
+  }
+
+  /* تحسينات إضافية */
+  ::selection{background:var(--gold);color:#1a1410}
+
+  .scroll-hint{
+    position:fixed;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    color:var(--gold);
+    font-size:24px;
+    opacity:.4;
+    animation:bounce 2s infinite;
+    pointer-events:none;
+  }
+  @keyframes bounce{
+    0%,100%{transform:translateX(-50%) translateY(0)}
+    50%{transform:translateX(-50%) translateY(-10px)}
+  }
+
+  /* ===== زر ابدأ رحلة التغيير ===== */
+  .start-journey-section{
+    text-align:center;
+    padding:8px 0 28px;
+  }
+  .start-journey-hint{
+    color:var(--ink-soft);
+    font-size:15px;
+    margin-bottom:20px;
+    font-weight:300;
+  }
+  .start-journey-btn{
+    background:linear-gradient(180deg,var(--gold) 0%,var(--gold-soft) 100%);
+    color:#1a1410;
+    border:none;
+    padding:22px 44px;
+    font-size:20px;
+    font-weight:700;
+    font-family:'Reem Kufi','Tajawal',sans-serif;
+    border-radius:14px;
+    cursor:pointer;
+    box-shadow:0 20px 40px -10px rgba(201,169,106,.4),0 0 0 1px rgba(201,169,106,.3);
+    transition:all .3s ease;
+    letter-spacing:1px;
+    animation:pulse 2.5s infinite;
+  }
+  .start-journey-btn:hover{
+    transform:translateY(-3px);
+    box-shadow:0 25px 50px -10px rgba(201,169,106,.5);
+  }
+  .start-journey-btn:active{transform:translateY(0)}
+
+  /* ===== التحفيز اليومي ===== */
+  .motivation-card{
+    background:linear-gradient(135deg,rgba(61,107,107,.13),rgba(201,169,106,.06));
+    border:1px solid rgba(201,169,106,.22);
+    text-align:center;
+  }
+  .motivation-day-badge{
+    display:inline-block;
+    background:rgba(201,169,106,.1);
+    border:1px solid rgba(201,169,106,.2);
+    border-radius:20px;
+    padding:4px 16px;
+    font-size:13px;
+    color:var(--gold);
+    margin-bottom:20px;
+    letter-spacing:1px;
+  }
+  .motivation-quote{
+    font-family:'Amiri',serif;
+    font-size:clamp(20px,3.5vw,28px);
+    color:var(--ink);
+    line-height:2.1;
+    margin:16px 0 20px;
+    font-weight:700;
+  }
+  .motivation-source{
+    color:var(--gold);
+    font-size:14px;
+    letter-spacing:2px;
+    margin-top:8px;
+  }
+
+  /* ===== ملاحظاتي وتحسناتي ===== */
+  .notes-textarea{
+    width:100%;
+    min-height:160px;
+    background:rgba(0,0,0,.22);
+    border:1px solid var(--line-soft);
+    border-radius:10px;
+    color:var(--ink);
+    font-family:'Tajawal',sans-serif;
+    font-size:16px;
+    line-height:1.9;
+    padding:16px 18px;
+    resize:vertical;
+    direction:rtl;
+    margin-top:16px;
+    transition:border-color .3s ease;
+    outline:none;
+  }
+  .notes-textarea:focus{border-color:rgba(201,169,106,.4)}
+  .notes-textarea::placeholder{color:var(--ink-dim)}
+  .notes-saved-indicator{
+    font-size:13px;
+    color:#7aaa7a;
+    margin-top:10px;
+    opacity:0;
+    transition:opacity .5s ease;
+    text-align:right;
+  }
+  .notes-saved-indicator.visible{opacity:1}
+
+  /* ===== رأس تاريخ الملاحظات ===== */
+  .notes-date-bar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:9px 14px;
+    background:rgba(201,169,106,.07);
+    border:1px solid rgba(201,169,106,.15);
+    border-radius:8px;
+    margin-bottom:12px;
+    color:var(--gold);
+    font-size:13px;
+    letter-spacing:.5px;
+  }
+  .notes-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:10px;
+  }
+  .notes-char-count{font-size:12px;color:var(--ink-dim)}
+
+  /* ===== قائمة المهام ===== */
+  .todo-input-row{display:flex;gap:10px;margin:16px 0 4px}
+  .todo-input{
+    flex:1;
+    background:rgba(0,0,0,.22);
+    border:1px solid var(--line-soft);
+    border-radius:8px;
+    color:var(--ink);
+    font-family:'Tajawal',sans-serif;
+    font-size:15px;
+    padding:12px 16px;
+    direction:rtl;
+    outline:none;
+    transition:border-color .3s;
+  }
+  .todo-input:focus{border-color:rgba(201,169,106,.4)}
+  .todo-input::placeholder{color:var(--ink-dim)}
+  .todo-add-btn{
+    background:var(--gold);
+    color:#1a1410;
+    border:none;
+    border-radius:8px;
+    width:46px;
+    height:46px;
+    font-size:26px;
+    font-weight:700;
+    cursor:pointer;
+    transition:all .2s;
+    flex-shrink:0;
+    line-height:1;
+  }
+  .todo-add-btn:hover{background:#e0c08a;transform:scale(1.06)}
+  .todo-add-btn:active{transform:scale(.94)}
+
+  .todo-list{list-style:none;margin:8px 0 0}
+  .todo-item{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    padding:12px 14px;
+    margin-bottom:8px;
+    background:rgba(0,0,0,.18);
+    border:1px solid var(--line-soft);
+    border-radius:8px;
+    transition:all .3s;
+    animation:fadeUp .3s ease;
+  }
+  .todo-item.done{
+    opacity:.5;
+    background:rgba(90,138,90,.05);
+    border-color:rgba(90,138,90,.15);
+  }
+  .todo-checkbox{
+    width:22px;height:22px;
+    border:2px solid var(--gold-soft);
+    border-radius:50%;
+    flex-shrink:0;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:all .2s;
+    user-select:none;
+    font-size:12px;
+    color:transparent;
+  }
+  .todo-item.done .todo-checkbox{
+    background:#5a8a5a;
+    border-color:#5a8a5a;
+    color:#fff;
+    font-weight:700;
+  }
+  .todo-text{
+    flex:1;
+    color:var(--ink);
+    font-size:15px;
+    word-break:break-word;
+  }
+  .todo-item.done .todo-text{
+    text-decoration:line-through;
+    color:var(--ink-dim);
+  }
+  .todo-meta{
+    font-size:11px;
+    color:var(--ink-dim);
+    white-space:nowrap;
+    margin-right:4px;
+  }
+  .todo-delete{
+    color:var(--ink-dim);
+    cursor:pointer;
+    font-size:14px;
+    opacity:.4;
+    transition:all .2s;
+    background:none;
+    border:none;
+    padding:4px 6px;
+    line-height:1;
+    flex-shrink:0;
+  }
+  .todo-delete:hover{opacity:1;color:var(--danger)}
+
+  .todo-stats-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-top:14px;
+    font-size:13px;
+    color:var(--ink-dim);
+  }
+  .todo-clear-btn{
+    background:none;
+    border:1px solid var(--line-soft);
+    color:var(--ink-dim);
+    border-radius:6px;
+    padding:5px 12px;
+    font-size:12px;
+    font-family:'Tajawal',sans-serif;
+    cursor:pointer;
+    transition:all .2s;
+  }
+  .todo-clear-btn:hover{border-color:var(--danger);color:var(--danger)}
+  .todo-progress{
+    height:4px;
+    background:rgba(255,255,255,.06);
+    border-radius:4px;
+    margin-top:12px;
+    overflow:hidden;
+  }
+  .todo-progress-fill{
+    height:100%;
+    background:linear-gradient(90deg,var(--accent),#7aaa7a);
+    border-radius:4px;
+    transition:width .5s ease;
+  }
+  .todo-empty{
+    text-align:center;
+    color:var(--ink-dim);
+    padding:28px 0 16px;
+    font-size:14px;
+  }
+
+  @media (max-width:600px){
+    .start-journey-btn{width:100%;padding:18px 24px;font-size:18px}
+    .notes-textarea{min-height:130px;font-size:15px}
+    .todo-input{font-size:14px;padding:11px 12px}
+    .todo-add-btn{width:42px;height:42px;font-size:22px}
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- ====== الترويسة ====== -->
+  <header class="hero">
+    <div class="hero-ornament">❖ ◈ ❖</div>
+    <h1>
+      توقّف الآن…
+      <span class="highlight">أنت أقوى من هذه اللحظة</span>
+    </h1>
+    <p class="hero-sub">
+      خذ نفسًا عميقًا. لقد فتحت هذه الصفحة لأنك تريد أن تنتصر. وهذا وحده دليل قوة.
+    </p>
+  </header>
+
+  <!-- ====== العدّاد ====== -->
+  <section class="card counter-card">
+    <div class="counter-title">أنا أقوى مما أظن</div>
+
+    <!-- زر بدء الرحلة — يظهر فقط إن لم تبدأ بعد -->
+    <div class="start-journey-section" id="startJourneySection" style="display:none">
+      <p class="start-journey-hint">اضغط لتسجّل لحظة بدايتك الرسمية وينطلق العدّ</p>
+      <button class="start-journey-btn" id="startJourneyBtn">✦ ابدأ رحلة التغيير ✦</button>
+    </div>
+
+    <div class="counter-display">
+      <div class="counter-unit">
+        <div class="counter-num" id="days">0</div>
+        <div class="counter-label">يوم</div>
+      </div>
+      <div class="counter-unit">
+        <div class="counter-num" id="hours">0</div>
+        <div class="counter-label">ساعة</div>
+      </div>
+      <div class="counter-unit">
+        <div class="counter-num" id="minutes">0</div>
+        <div class="counter-label">دقيقة</div>
+      </div>
+      <div class="counter-unit">
+        <div class="counter-num" id="seconds">0</div>
+        <div class="counter-label">ثانية</div>
+      </div>
+    </div>
+    <div class="since-text" id="sinceText">منذ بداية رحلتك</div>
+    <button class="reset-button" id="resetBtn">ابدأ من جديد بدون يأس</button>
+  </section>
+
+  <!-- ====== التحفيز اليومي ====== -->
+  <section class="card motivation-card">
+    <span class="card-label">تحفيز اليوم</span>
+    <h2 style="padding-right:0;text-align:center">كلمة لروحك اليوم</h2>
+    <div class="motivation-day-badge" id="motivationDayBadge">اليوم</div>
+    <div class="motivation-quote" id="motivationQuote"></div>
+    <div class="motivation-source" id="motivationSource"></div>
+  </section>
+
+  <!-- ====== ملاحظاتي وتحسناتي ====== -->
+  <section class="card">
+    <span class="card-label">يومياتي</span>
+    <h2>ملاحظاتي وتحسناتي</h2>
+    <div class="notes-date-bar" id="notesDateBar">📅 ...</div>
+    <textarea class="notes-textarea" id="notesTextarea" placeholder="اكتب ملاحظاتك هنا… كيف تشعر اليوم؟ ما الذي تحسّن؟ ما التحديات التي واجهتها؟"></textarea>
+    <div class="notes-footer">
+      <div class="notes-saved-indicator" id="notesSavedIndicator">✓ تم حفظ ملاحظاتك تلقائيًا</div>
+      <div class="notes-char-count" id="notesCharCount">0 حرف</div>
+    </div>
+  </section>
+
+  <!-- ====== قائمة المهام ====== -->
+  <section class="card">
+    <span class="card-label">منظّمي</span>
+    <h2>قائمة مهامي</h2>
+    <div class="todo-input-row">
+      <input type="text" class="todo-input" id="todoInput" placeholder="أضف مهمة جديدة واضغط Enter…" maxlength="120" />
+      <button class="todo-add-btn" id="todoAddBtn" title="إضافة">+</button>
+    </div>
+    <ul class="todo-list" id="todoList"></ul>
+    <div class="todo-stats-row" id="todoStatsRow" style="display:none">
+      <span id="todoStats"></span>
+      <button class="todo-clear-btn" id="todoClearBtn">حذف المكتملة</button>
+    </div>
+    <div class="todo-progress" id="todoProgress" style="display:none">
+      <div class="todo-progress-fill" id="todoProgressFill"></div>
+    </div>
+  </section>
+
+  <!-- ====== الرسالة الختامية ====== -->
+  <div class="closing">
+    <div class="closing-icon">❀</div>
+    <p>
+      إن سقطت، فلا تيأس.<br>
+      تُب إلى الله، قم من جديد، وتعلّم من السبب.<br>
+      <strong style="color:var(--gold)">المعركة ليست في ألا تسقط أبدًا،<br>بل في ألا تستسلم.</strong>
+    </p>
+    <div class="signature">❖ ❖ ❖</div>
+  </div>
+
+  <div class="divider"><span>❁</span></div>
+
+  <!-- ====== رسالة افتتاحية ====== -->
+  <section class="card">
+    <span class="card-label">رسالة إليك</span>
+    <h2>الرغبة مؤقتة… والندم طويل</h2>
+    <p>
+      اسمعني جيدًا. هذه الرغبة التي تحرقك الآن، <strong>لن تستمر</strong>. ستذهب كما جاءت، إن تجاوزتها. لكن الندم الذي سيأتي بعد الفعل سيبقى ساعات، بل أيامًا، يثقل صدرك ويسرق نومك.
+    </p>
+    <p>
+      لا تبع راحتك، وكرامتك، وقربك من ربك… مقابل دقائق من لذة كاذبة تتركك أكثر فراغًا مما كنت.
+    </p>
+    <p>
+      أنت لست ضحية لهذه اللحظة. أنت إنسان حر، عاقل، له هدف أكبر من شهوة عابرة. <strong>تذكّر من أنت، ولماذا بدأت هذا الطريق.</strong>
+    </p>
+  </section>
+
+  <!-- ====== الآثار السلبية ====== -->
+  <section class="card">
+    <span class="card-label">واجه الحقيقة</span>
+    <h2>تذكّر أسوأ ما تسببه لك هذه العادة</h2>
+    <p>قبل أن تتحرك خطوة واحدة نحوها، اقرأ هذه القائمة ببطء:</p>
+    <ul class="item-list danger-list">
+      <li><span class="num">۰۱</span>شعور الذنب الذي يخنق صدرك بعد الانتهاء مباشرة</li>
+      <li><span class="num">۰۲</span>ضعف إرادتك وانهيار ثقتك بنفسك مرة بعد مرة</li>
+      <li><span class="num">۰۳</span>ساعات تضيع من عمرك، وطاقة تُستنزف بلا فائدة</li>
+      <li><span class="num">۰۴</span>تشوّش في ذهنك وضعف في تركيزك وذاكرتك</li>
+      <li><span class="num">۰۵</span>ابتعاد عن الصلاة والقرآن وفقد الراحة الروحية</li>
+      <li><span class="num">۰۶</span>عزلة وكسل يكبران كلما استسلمت أكثر</li>
+      <li><span class="num">۰۷</span>الإحساس المؤلم بأنك عبد لرغبة لا تتحكم فيها</li>
+    </ul>
+    <p style="margin-top:24px;color:var(--gold);font-weight:500">
+      هل كل هذا يستحق دقائق؟ الإجابة في قلبك تعرفها.
+    </p>
+  </section>
+
+  <!-- ====== القسم الديني ====== -->
+  <section class="card quran-card">
+    <span class="card-label">من نور الوحي</span>
+    <h2 style="padding-right:0;text-align:center">غضّ البصر هو بداية النجاة</h2>
+    <p style="text-align:center">
+      كل سقوط يبدأ بنظرة. والنظرة سهم من سهام إبليس. غضّ البصر يحمي قلبك من القلق، وعقلك من الصور، وروحك من السواد.
+    </p>
+    <div class="verse">
+      قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ ۚ ذَٰلِكَ أَزْكَىٰ لَهُمْ
+    </div>
+    <div class="verse-source">— سورة النور · الآية ۳۰</div>
+
+    <ul class="item-list" style="margin-top:32px;text-align:right">
+      <li><span class="num">●</span>لا تفتح أي محتوى تعرف أنه سيشعل شهوتك</li>
+      <li><span class="num">●</span>ابتعد عن الخلوة الطويلة مع الهاتف، خاصة ليلاً</li>
+      <li><span class="num">●</span>احذف الحسابات والتطبيقات والمواقع التي تُضعفك</li>
+      <li><span class="num">●</span>إن رأيت شيئًا مثيرًا فجأة، أغلقه فورًا، ولا تفاوض نفسك</li>
+    </ul>
+  </section>
+
+  <!-- ====== ماذا أفعل الآن ====== -->
+  <section class="card">
+    <span class="card-label">خطة طوارئ</span>
+    <h2>ماذا تفعل عندما تأتيك الرغبة الآن؟</h2>
+    <p>اتبع هذه الخطوات بالترتيب، ولا تجادل نفسك:</p>
+    <ul class="item-list">
+      <li><span class="num">۰۱</span>قم من مكانك فورًا، وغيّر وضعيتك</li>
+      <li><span class="num">۰۲</span>توضّأ، أو اغسل وجهك بماء بارد</li>
+      <li><span class="num">۰۳</span>اخرج من الغرفة التي أنت فيها</li>
+      <li><span class="num">۰۴</span>صلِّ ركعتين، أو اقرأ صفحة من القرآن</li>
+      <li><span class="num">۰۵</span>امشِ في الهواء الطلق لعشر دقائق</li>
+      <li><span class="num">۰۶</span>اتصل بصديق، أو اجلس مع أهلك</li>
+      <li><span class="num">۰۷</span>قل بقلبك ولسانك: «اللهم اصرف عني السوء والفحشاء»</li>
+    </ul>
+  </section>
+
+  <!-- ====== الزر الكبير ====== -->
+  <div class="action-section">
+    <p style="color:var(--ink-soft);margin-bottom:24px;font-size:17px">
+      الآن، اتخذ قرارك بيدك:
+    </p>
+    <button class="big-button" id="resistBtn">لن أفعلها الآن</button>
+    <div class="success-message" id="successMsg">
+      أحسنت. لقد انتصرتَ في هذه اللحظة.
+      <br>اصمد فقط ۱٠ دقائق أخرى، وستجد الرغبة قد ذهبت.
+      <span class="ts" id="ts"></span>
+    </div>
+  </div>
+
+  <!-- ====== العبارات القوية ====== -->
+  <section class="card">
+    <span class="card-label">ثبّتها في قلبك</span>
+    <h2>الحقيقة التي يجب أن تتذكرها</h2>
+    <ul class="truth-list">
+      <li>الرغبة موجة… وستنتهي حتمًا إن لم تطعمها</li>
+      <li>لستُ مُلزَمًا بأن أطيع كل فكرة تعبر رأسي</li>
+      <li>أنا لا أترك شيئًا ممتعًا، أنا أتحرر من قيد</li>
+      <li>كل مرة أقاوم فيها، تزداد إرادتي قوة</li>
+      <li>الله يرى جهادي، ولن يضيع تعبي عنده</li>
+    </ul>
+  </section>
+
+  <!-- ====== فوائد ۷ أيام ====== -->
+  <section class="card">
+    <span class="card-label">ما ينتظرك</span>
+    <h2>بعد ۷ أيام فقط من التوقف</h2>
+    <p>هذا ما ستشعر به، حتى لو لم تصدّق الآن:</p>
+    <ul class="item-list benefit-list">
+      <li><span class="num">✦</span>صفاء أكبر في ذهنك، وقدرة على التفكير بوضوح</li>
+      <li><span class="num">✦</span>راحة نفسية لم تشعر بها منذ وقت طويل</li>
+      <li><span class="num">✦</span>ثقة عالية بنفسك تنعكس على كل تفاصيل يومك</li>
+      <li><span class="num">✦</span>رغبة صادقة في الصلاة والقرب من الله</li>
+      <li><span class="num">✦</span>إحساس حقيقي بأنك تتحكم بنفسك، لا العكس</li>
+    </ul>
+  </section>
+
+
+</div>
+
+<script>
+  // ============ الزر الرئيسي ============
+  const btn = document.getElementById('resistBtn');
+  const msg = document.getElementById('successMsg');
+  const ts  = document.getElementById('ts');
+
+  btn.addEventListener('click', () => {
+    msg.classList.add('show');
+    const now = new Date();
+    const arabicTime = now.toLocaleString('ar-EG', {
+      hour:'2-digit', minute:'2-digit',
+      day:'numeric', month:'long', year:'numeric'
+    });
+    ts.textContent = '✓ سُجّل انتصارك في ' + arabicTime;
+
+    // اهتزاز خفيف للتأكيد
+    btn.style.transform = 'scale(.96)';
+    setTimeout(() => btn.style.transform = '', 150);
+
+    // حفظ عداد الانتصارات
+    let wins = parseInt(localStorage.getItem('wins') || '0') + 1;
+    localStorage.setItem('wins', wins);
+  });
+
+  // ============ العدّاد ============
+  const STORAGE_KEY = 'streakStart';
+  const JOURNEY_KEY  = 'journeyActive';
+  let startTime    = localStorage.getItem(STORAGE_KEY);
+  let journeyActive = localStorage.getItem(JOURNEY_KEY) === '1';
+
+  // توافق مع الإصدارات السابقة: وقت البداية موجود بدون مفتاح الرحلة
+  if (startTime && !journeyActive) {
+    journeyActive = true;
+    localStorage.setItem(JOURNEY_KEY, '1');
+  }
+
+  if (journeyActive && startTime) {
+    startTime = parseInt(startTime);
+    document.getElementById('startJourneySection').style.display = 'none';
+  } else {
+    startTime = null;
+    document.getElementById('startJourneySection').style.display = '';
+    document.querySelector('.counter-display').style.display    = 'none';
+    document.getElementById('sinceText').style.display          = 'none';
+    document.getElementById('resetBtn').style.display           = 'none';
+  }
+
+  const $days = document.getElementById('days');
+  const $hours = document.getElementById('hours');
+  const $minutes = document.getElementById('minutes');
+  const $seconds = document.getElementById('seconds');
+  const $since = document.getElementById('sinceText');
+
+  function updateCounter(){
+    if (!startTime) return;
+    const diff = Date.now() - startTime;
+    const totalSec = Math.floor(diff / 1000);
+    const d = Math.floor(totalSec / 86400);
+    const h = Math.floor((totalSec % 86400) / 3600);
+    const m = Math.floor((totalSec % 3600) / 60);
+    const s = totalSec % 60;
+
+    $days.textContent    = d;
+    $hours.textContent   = String(h).padStart(2,'0');
+    $minutes.textContent = String(m).padStart(2,'0');
+    $seconds.textContent = String(s).padStart(2,'0');
+
+    const date = new Date(startTime);
+    const formatted = date.toLocaleDateString('ar-EG', {
+      day:'numeric', month:'long', year:'numeric'
+    });
+    $since.textContent = 'منذ ' + formatted;
+  }
+
+  updateCounter();
+  setInterval(updateCounter, 1000);
+
+  // ============ زر إعادة الضبط ============
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    const ok = confirm('هل تريد بدء عدّ جديد؟\nلا تيأس، السقوط جزء من الطريق، والمهم أن تنهض.');
+    if (ok) {
+      startTime = Date.now();
+      localStorage.setItem(STORAGE_KEY, startTime);
+      localStorage.setItem(JOURNEY_KEY, '1');
+      journeyActive = true;
+      updateCounter();
+
+      // رسالة تشجيعية مؤقتة
+      const since = document.getElementById('sinceText');
+      const orig = since.textContent;
+      since.textContent = '✦ بداية جديدة… الله معك ✦';
+      since.style.color = 'var(--gold)';
+      setTimeout(() => {
+        updateCounter();
+        since.style.color = '';
+      }, 3000);
+    }
+  });
+
+  // ============ زر ابدأ رحلة التغيير ============
+  document.getElementById('startJourneyBtn').addEventListener('click', () => {
+    startTime = Date.now();
+    localStorage.setItem(STORAGE_KEY, startTime);
+    localStorage.setItem(JOURNEY_KEY, '1');
+    journeyActive = true;
+
+    document.getElementById('startJourneySection').style.display   = 'none';
+    document.querySelector('.counter-display').style.display        = '';
+    document.getElementById('sinceText').style.display              = '';
+    document.getElementById('resetBtn').style.display               = '';
+
+    updateCounter();
+  });
+
+  // ============ التحفيز اليومي ============
+  const dailyMotivations = [
+    { text: "وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ❋ وَيَرْزُقْهُ مِنْ حَيْثُ لَا يَحْتَسِبُ", source: "سورة الطلاق · الآية ٢-٣" },
+    { text: "إِنَّ مَعَ الْعُسْرِ يُسْرًا", source: "سورة الشرح · الآية ٦" },
+    { text: "وَالَّذِينَ جَاهَدُوا فِينَا لَنَهْدِيَنَّهُمْ سُبُلَنَا ❋ وَإِنَّ اللَّهَ لَمَعَ الْمُحْسِنِينَ", source: "سورة العنكبوت · الآية ٦٩" },
+    { text: "إن الله يحبّ إذا عمل أحدكم عملًا أن يتقنه", source: "حديث شريف" },
+    { text: "كل نفس خُلقت لتنتصر، والفرق بين الضعيف والقوي هو عدد مرات النهوض", source: "حكمة" },
+    { text: "أَلَمْ نَشْرَحْ لَكَ صَدْرَكَ ❋ وَوَضَعْنَا عَنكَ وِزْرَكَ الَّذِي أَنقَضَ ظَهْرَكَ", source: "سورة الشرح · الآية ١-٣" },
+    { text: "من جدّ وجد، ومن زرع حصد، ومن سار على الدرب وصل", source: "حكمة عربية" },
+    { text: "وَعَسَىٰ أَن تَكْرَهُوا شَيْئًا وَهُوَ خَيْرٌ لَّكُمْ", source: "سورة البقرة · الآية ٢١٦" },
+    { text: "أقوى الناس من يملك إرادته، لا من يملك القوة وحدها", source: "حكمة" },
+    { text: "قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَىٰ أَنفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ", source: "سورة الزمر · الآية ٥٣" },
+    { text: "لكل صبر ثمرة، ولكل ليل فجر، ولكل نهاية بداية أجمل", source: "حكمة" },
+    { text: "إِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ", source: "سورة التوبة · الآية ١٢٠" },
+    { text: "كُن في الدنيا كأنك غريب أو عابر سبيل", source: "حديث شريف — ابن عمر رضي الله عنه" },
+    { text: "أعظم انتصار هو أن تنتصر على نفسك", source: "حكمة" },
+    { text: "فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ❋ إِنَّ مَعَ الْعُسْرِ يُسْرًا", source: "سورة الشرح · الآيتان ٥-٦" },
+    { text: "الثقة بالله أوّل سرّ النجاح، والثقة بالنفس ثانيه", source: "حكمة" },
+    { text: "وَتَوَكَّلْ عَلَى اللَّهِ ❋ وَكَفَىٰ بِاللَّهِ وَكِيلًا", source: "سورة الأحزاب · الآية ٣" },
+    { text: "إنك قادر أكثر مما تتخيل، وأقوى مما تعتقد، وأكرم على الله مما تظن", source: "حكمة" },
+    { text: "من أصبح منكم آمنًا في سربه، مُعافى في جسده، عنده قوت يومه، فكأنما حيزت له الدنيا", source: "حديث شريف" },
+    { text: "لا تنظر إلى صغر المعصية، ولكن انظر إلى عظمة من عصيت", source: "ابن مسعود رضي الله عنه" },
+    { text: "اللهم أعنّي على ذكرك وشكرك وحسن عبادتك", source: "دعاء نبوي شريف" },
+    { text: "كل يوم تقاوم فيه هو يوم تبني فيه نفسًا أقوى وإرادة أمتن", source: "حكمة" },
+    { text: "إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", source: "سورة البقرة · الآية ١٥٣" },
+    { text: "الشجاعة ليست غياب الخوف، بل أن تمضي رغمه", source: "حكمة" },
+    { text: "وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", source: "سورة الطلاق · الآية ٣" },
+    { text: "ذكر الله نور في القلب، وسكينة في الروح، وطمأنينة في الصدر", source: "حكمة" },
+    { text: "وَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ❋ وَإِنَّهَا لَكَبِيرَةٌ إِلَّا عَلَى الْخَاشِعِينَ", source: "سورة البقرة · الآية ٤٥" },
+    { text: "أعلى مراتب الشجاعة أن تقف في وجه نفسك وتقول: لن أستسلم", source: "حكمة" },
+    { text: "إن مع الصبر نصرًا، وإن مع الضيق فرجًا، وإن مع اليسر عسرًا", source: "حكمة" },
+    { text: "يَا أَيَّتُهَا النَّفْسُ الْمُطْمَئِنَّةُ ❋ ارْجِعِي إِلَىٰ رَبِّكِ رَاضِيَةً مَّرْضِيَّةً", source: "سورة الفجر · الآية ٢٧-٢٨" },
+  ];
+
+  (function loadDailyMotivation() {
+    const now        = new Date();
+    const start      = new Date(now.getFullYear(), 0, 0);
+    const dayOfYear  = Math.floor((now - start) / 86400000);
+    const idx        = dayOfYear % dailyMotivations.length;
+    const quote      = dailyMotivations[idx];
+    const days       = ['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'];
+    const dayName    = days[now.getDay()];
+    const dateStr    = now.toLocaleDateString('ar-EG', { day:'numeric', month:'long' });
+
+    document.getElementById('motivationDayBadge').textContent = dayName + ' · ' + dateStr;
+    document.getElementById('motivationQuote').textContent    = quote.text;
+    document.getElementById('motivationSource').textContent   = '— ' + quote.source;
+  })();
+
+  // ============ ملاحظاتي وتحسناتي ============
+  const NOTES_KEY      = 'myPersonalNotes';
+  const notesTextarea  = document.getElementById('notesTextarea');
+  const notesSavedEl   = document.getElementById('notesSavedIndicator');
+  const notesCharEl    = document.getElementById('notesCharCount');
+  let   notesSaveTimer = null;
+
+  // تاريخ اليوم في رأس الملاحظات
+  (function(){
+    const now = new Date();
+    const dateStr = now.toLocaleDateString('ar-EG', {
+      weekday:'long', day:'numeric', month:'long', year:'numeric'
+    });
+    document.getElementById('notesDateBar').textContent = '📅 ' + dateStr;
+  })();
+
+  notesTextarea.value = localStorage.getItem(NOTES_KEY) || '';
+  notesCharEl.textContent = notesTextarea.value.length + ' حرف';
+
+  notesTextarea.addEventListener('input', () => {
+    notesCharEl.textContent = notesTextarea.value.length + ' حرف';
+    clearTimeout(notesSaveTimer);
+    notesSaveTimer = setTimeout(() => {
+      localStorage.setItem(NOTES_KEY, notesTextarea.value);
+      notesSavedEl.classList.add('visible');
+      setTimeout(() => notesSavedEl.classList.remove('visible'), 2500);
+    }, 800);
+  });
+
+  // ============ قائمة المهام ============
+  const TODO_KEY = 'myTodoList';
+  let todos = [];
+  try { todos = JSON.parse(localStorage.getItem(TODO_KEY) || '[]'); } catch(e){}
+
+  function saveTodos(){ localStorage.setItem(TODO_KEY, JSON.stringify(todos)); }
+
+  function renderTodos(){
+    const list      = document.getElementById('todoList');
+    const statsRow  = document.getElementById('todoStatsRow');
+    const statsEl   = document.getElementById('todoStats');
+    const progressEl= document.getElementById('todoProgress');
+    const fillEl    = document.getElementById('todoProgressFill');
+
+    list.innerHTML = '';
+
+    if(todos.length === 0){
+      list.innerHTML = '<li class="todo-empty">لا مهام بعد — أضف أول مهمة لك 🎯</li>';
+      statsRow.style.display  = 'none';
+      progressEl.style.display= 'none';
+      return;
+    }
+
+    todos.forEach((todo, idx) => {
+      const li = document.createElement('li');
+      li.className = 'todo-item' + (todo.done ? ' done' : '');
+      li.innerHTML =
+        '<div class="todo-checkbox" data-idx="' + idx + '">' + (todo.done ? '✓' : '') + '</div>' +
+        '<span class="todo-text">' + todo.text.replace(/</g,'&lt;') + '</span>' +
+        (todo.date ? '<span class="todo-meta">' + todo.date + '</span>' : '') +
+        '<button class="todo-delete" data-idx="' + idx + '">✕</button>';
+      list.appendChild(li);
+    });
+
+    const done  = todos.filter(t => t.done).length;
+    const total = todos.length;
+    statsEl.textContent = done + ' / ' + total + ' مكتملة';
+    statsRow.style.display   = '';
+    progressEl.style.display = '';
+    fillEl.style.width = (total ? Math.round(done/total*100) : 0) + '%';
+
+    const clearBtn = document.getElementById('todoClearBtn');
+    clearBtn.style.display = done > 0 ? '' : 'none';
+  }
+
+  function addTodo(){
+    const input = document.getElementById('todoInput');
+    const text  = input.value.trim();
+    if(!text) return;
+    const today = new Date().toLocaleDateString('ar-EG', {day:'numeric', month:'short'});
+    todos.unshift({ text, done: false, date: today });
+    saveTodos(); renderTodos();
+    input.value = '';
+    input.focus();
+  }
+
+  document.getElementById('todoList').addEventListener('click', e => {
+    const checkbox = e.target.closest('.todo-checkbox');
+    const delBtn   = e.target.closest('.todo-delete');
+    if(checkbox){
+      const idx = parseInt(checkbox.dataset.idx);
+      todos[idx].done = !todos[idx].done;
+      saveTodos(); renderTodos();
+    }
+    if(delBtn){
+      const idx = parseInt(delBtn.dataset.idx);
+      todos.splice(idx, 1);
+      saveTodos(); renderTodos();
+    }
+  });
+
+  document.getElementById('todoAddBtn').addEventListener('click', addTodo);
+  document.getElementById('todoInput').addEventListener('keydown', e => {
+    if(e.key === 'Enter') addTodo();
+  });
+  document.getElementById('todoClearBtn').addEventListener('click', () => {
+    todos = todos.filter(t => !t.done);
+    saveTodos(); renderTodos();
+  });
+
+  renderTodos();
+
+  // ============ تأثير ظهور تدريجي عند التمرير ============
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.card').forEach(card => {
+    observer.observe(card);
+  });
+</script>
+
+</body>
+</html>

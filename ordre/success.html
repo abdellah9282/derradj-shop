@@ -1,84 +1,57 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NME3KN9N"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-N4NME3KN9N');
-</script>
-
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-N4NME3KN9N"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-N4NME3KN9N');
+  </script>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/jpeg" href="/Logo.png">
-
-  <title>تم تأكيد الطلب</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <style>
-    body {
-      font-family: Tahoma, Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-
-    .box {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      max-width: 420px;
-      width: 90%;
-      text-align: center;
-      box-shadow: 0 10px 25px rgba(0,0,0,.1);
-    }
-
-    .box h1 {
-      color: #2e7d32;
-      margin-bottom: 15px;
-    }
-
-    .box p {
-      color: #333;
-      line-height: 1.8;
-      font-size: 16px;
-    }
-
-    .box a {
-      display: inline-block;
-      margin-top: 20px;
-      text-decoration: none;
-      background: #000;
-      color: #fff;
-      padding: 10px 18px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>تم تأكيد طلبك — Derradj Shop</title>
+  <link rel="icon" type="image/png" href="../Logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css" />
 </head>
 <body>
 
-  <div class="box">
-    <h1>✅ تم تقديم طلبك بنجاح</h1>
-
-    <p>
-      شكرًا لك على ثقتك بنا <br>
-      تم استلام طلبك بنجاح، وسيتصل بك أحد ممثلي فريقنا في أقرب وقت
-      لتأكيد الطلب وتفاصيل التوصيل.
-    </p>
-
-    <p>
-      📞 يرجى التأكد من أن رقم هاتفك متاح.
-    </p>
-
-    <a href="../index.html">العودة إلى الصفحة الرئيسية</a>
+<header class="main-header">
+  <div class="header-inner">
+    <a href="../index.html" class="logo">
+      <span class="logo-icon">D</span>
+      <span>erradj <span class="logo-accent">Shop</span></span>
+    </a>
   </div>
+</header>
+
+<div class="success-page">
+  <div class="success-card">
+    <div class="success-icon">✅</div>
+    <h1>تم تقديم طلبك بنجاح!</h1>
+    <p>
+      شكراً لثقتك بـ <strong>Derradj Shop</strong> — متجر الإلكترونيات الأول في الجزائر.
+    </p>
+    <div class="success-detail">
+      <strong>ماذا يحدث الآن؟</strong><br>
+      📞 سيتواصل معك فريقنا قريباً لتأكيد طلبك وإرشادك لإتمام الدفع عبر البطاقة الذهبية.<br><br>
+      💳 <strong>الدفع:</strong> يتم عبر البطاقة الذهبية (CIB / Edahabia) بعد التأكيد.<br><br>
+      🚚 <strong>التوصيل:</strong> يصل طلبك خلال 15 يوم إلى شهر حسب ولايتك.<br><br>
+      📦 <strong>التغليف:</strong> سيصل منتجك مغلفاً بعناية في أحسن حال.
+    </div>
+    <p>تأكد من أن رقم هاتفك <strong>متاح</strong> حتى يتمكن فريقنا من التواصل معك.</p>
+    <a href="../index.html" class="btn-primary" style="margin-top:8px;">العودة للمتجر</a>
+  </div>
+</div>
+
+<footer class="main-footer">
+  <div class="footer-bottom">
+    <p>© 2025 Derradj Shop — جميع الحقوق محفوظة</p>
+  </div>
+</footer>
 
 </body>
 </html>
